@@ -18,3 +18,11 @@ Lien wiki : http://fr.wikipedia.org/wiki/Bataille_navale_%28jeu%29
 -> Score en direct
 
 ==> Possibilité de mode spécial : lancé de 3 frappes à la fois ...
+
+
+    1 porte-avions (5 cases)
+    1 croiseur (4 cases)
+    1 contre-torpilleurs (3 cases)
+    1 sous-marin (3 cases)
+    1 torpilleur (2 cases)
+
