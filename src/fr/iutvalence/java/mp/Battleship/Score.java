@@ -9,19 +9,19 @@ package fr.iutvalence.java.mp.Battleship;
 
 public class Score
 {
-    // TODO (think about it) does it makes sense to let the visibility as public ?
-    // TODO rename field (may be there is more than one ship alive)
+    // TODO FIXED (think about it) does it makes sense to let the visibility as public ?
+    // TODO FIXED rename field (may be there is more than one ship alive)
     /**
-     * Number of ship alive
+     * Number of ship alives
      */
-    public int nbShipAlive;
+    public int nbShipsAlive;
     
-    // TODO (think about it) does it makes sense to let the visibility as public ?
-    // TODO rename field (may be there is more than one ship dead)
+    // TODO FIXED (think about it) does it makes sense to let the visibility as public ?
+    // TODO FIXED rename field (may be there is more than one ship dead)
     /**
-     * Number of ship sank
+     * Number of ships sank
      */
-    public int nbShipDead;
+    public int nbShipsDead;
     
-    
+  
 }
