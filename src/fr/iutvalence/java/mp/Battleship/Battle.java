@@ -40,11 +40,16 @@ public class Battle
     /**
      * Player 1 grid
      */
-    private int[][] player1Grid = new Area [Battle.gridLength][Battle.gridLength];
+    Area player1Grid[][] = new Area[Battle.gridLength][Battle.gridLength] ; 
+    
+    /**
+     * Player 2 grid
+     */
+    Area player2Grid[][] = new Area[Battle.gridLength][Battle.gridLength] ; 
     
     
     
-    // TODO (fix) initial field values should be set in constructors
+    // TODO FIXED initial field values should be set in constructors
     /**
      * Begin a game
      */

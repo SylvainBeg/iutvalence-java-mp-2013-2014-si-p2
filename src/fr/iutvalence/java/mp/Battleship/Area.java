@@ -25,6 +25,9 @@ public class Area
     */
    private boolean sink;
    
+   
+   
+   
    /**
     *  Initialize an area
     */
@@ -34,6 +37,8 @@ public class Area
        this.hit = false;
        this.sink = false;
    }
+   
+   
    
    /**
     * fill area : a ship contains this area
