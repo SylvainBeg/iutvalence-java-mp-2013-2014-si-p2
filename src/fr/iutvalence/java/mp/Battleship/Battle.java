@@ -7,45 +7,37 @@ package fr.iutvalence.java.mp.Battleship;
  */
 public class Battle
 {
-    // FIXED TODO (think about it) does it makes sense to let the visibility as public ?
     /**
      * Player 1 score ; number of ships sank at player 2 
      */
     private int scorePlayer1;
 
-    // FIXED TODO (think about it) does it makes sense to let the visibility as public ?
-    // FIXED TODO (think about it) the game can only be played by an IA and a human ?
     /**
      * Player 2 score ; number of ships sank at player 1 ; computer or human ?
      */
     private int scorePlayer2;
     
     
-    // TODO FIXED rename field
+    // TODO (fix) rename field
     /**
      * Number of turns
      */
     private int nbTurn;
     
+    // TODO FIXED comply with naming conventions
+    // TODO (fix) move constants declarations before fields
     /**
      * Default number of battle 
      */
-    private final static int Ships_DEFAULT = 5;
+    private final static int SHIPS_DEFAULT = 5;
     
+    // TODO FIXED comply with naming conventions
+    // TODO (fix) move constants declarations before fields
     /**
      * Default length of grid
      */
-    private final static int gridLength = 10;
+    private final static int GRID_LENGTH = 10;
     
-    /**
-     * Player 1 grid
-     */
-    Area player1Grid[][] = new Area[Battle.gridLength][Battle.gridLength] ; 
-    
-    /**
-     * Player 2 grid
-     */
-    Area player2Grid[][] = new Area[Battle.gridLength][Battle.gridLength] ; 
     
     
     
@@ -58,6 +50,17 @@ public class Battle
         this.nbTurn = 0;
         this.scorePlayer1 = 0;
         this.scorePlayer2 = 0;
+        
+     // TODO FIXED initialize fields in constructors only
+        /**
+         * Player 1 grid
+         */
+        Area player1Grid[][] = new Area[Battle.GRID_LENGTH][Battle.GRID_LENGTH] ; 
+        
+        /**
+         * Player 2 grid
+         */
+        Area player2Grid[][] = new Area[Battle.GRID_LENGTH][Battle.GRID_LENGTH] ; 
     }
     
     
@@ -104,7 +107,7 @@ public class Battle
      */
     public int getShips_DEFAUT()
     {
-        return  Battle.Ships_DEFAULT;
+        return  Battle.SHIPS_DEFAULT;
     }
     
     /**
