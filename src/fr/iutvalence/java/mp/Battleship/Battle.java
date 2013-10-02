@@ -7,42 +7,42 @@ package fr.iutvalence.java.mp.Battleship;
  */
 public class Battle
 {
-    // FIXED TODO (think about it) does it makes sense to let the visibility as public ?
     /**
      * Player 1 score ; number of ships sank at player 2 
      */
     private int scorePlayer1;
 
-    // FIXED TODO (think about it) does it makes sense to let the visibility as public ?
-    // FIXED TODO (think about it) the game can only be played by an IA and a human ?
     /**
      * Player 2 score ; number of ships sank at player 1 ; computer or human ?
      */
     private int scorePlayer2;
     
     
-    // TODO FIXED rename field
+    // TODO (fix) rename field
     /**
      * Number of turns
      */
     private int nbTurn;
     
+    // TODO (fix) comply with naming conventions
+    // TODO (fix) move constants declarations before fields
     /**
      * Default number of battle 
      */
     private final static int Ships_DEFAULT = 5;
     
+    // TODO (fix) comply with naming conventions
+    // TODO (fix) move constants declarations before fields
     /**
      * Default length of grid
      */
     private final static int gridLength = 10;
     
+    // TODO (fix) initialize fields in constructors only
     /**
      * Player 1 grid
      */
     private int[][] player1Grid = new Area [Battle.gridLength][Battle.gridLength];
-    
-    
     
     // TODO (fix) initial field values should be set in constructors
     /**

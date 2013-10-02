@@ -1,6 +1,7 @@
 package fr.iutvalence.java.mp.Battleship;
 
 
+// TODO (think about it) is this class really useful (needs a discussion!)
 /**
  * It's a case of game grid.
  * @author begous
@@ -8,23 +9,27 @@ package fr.iutvalence.java.mp.Battleship;
  */
 public class Area
 {
+    // TODO (fix) declare constants for relevant values
     /**
      * 0 : empty area
      * 1 : contain ship
      */
    private boolean contain;
    
+   // TODO (fix) finish writing comment
    /**
     * 0 : area not hit
     * 1 : area hit
     */
    private boolean hit;
-   
+
+   // TODO (fix) finish writing comment
    /**
     * 1 : contain ship and area hit
     */
    private boolean sink;
    
+   // TODO (fix) write a "real" comment
    /**
     *  Initialize an area
     */
@@ -54,9 +59,5 @@ public class Area
        {
            this.sink = true;
        }
-   }
-   
-
-    
-    
+   } 
 }
