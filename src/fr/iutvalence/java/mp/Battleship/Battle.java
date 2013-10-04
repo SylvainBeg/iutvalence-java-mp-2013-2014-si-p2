@@ -38,6 +38,20 @@ public class Battle
      */
     private final static int GRID_LENGTH = 10;
     
+    /**
+     *  Player 1 grid with player1Grid[0][0] : area A1
+     * each area contains a number which defines its condition
+     * 0 : empty and not hit
+     * 1 : contains ship and not hit
+     * 2 : empty and hit
+     * 3 : contains ship and hit
+     */
+    private int Grid1[][];
+    
+    /**
+     *  Player 2 grid with player1Grid[0][0] : area A1
+     */
+    private int Grid2[][];
     
     
     
@@ -53,14 +67,21 @@ public class Battle
         
      // TODO FIXED initialize fields in constructors only
         /**
-         * Player 1 grid
+         * Player 1 grid with player1Grid[0][0] : area A1
+         * each area contains a number which defines its condition
          */
-        Area player1Grid[][] = new Area[Battle.GRID_LENGTH][Battle.GRID_LENGTH] ; 
+        int player1Grid[][] = new int[Battle.GRID_LENGTH][Battle.GRID_LENGTH] ; 
+        
+        this.Grid1 = player1Grid;
+        
         
         /**
-         * Player 2 grid
+         * Player 2 grid with player2Grid[0][0] : area A1
+         * each area contains a number which defines its condition
          */
-        Area player2Grid[][] = new Area[Battle.GRID_LENGTH][Battle.GRID_LENGTH] ; 
+        int player2Grid[][] = new int[Battle.GRID_LENGTH][Battle.GRID_LENGTH] ;
+        
+        this.Grid2 = player2Grid;
     }
     
     
@@ -126,6 +147,57 @@ public class Battle
         this.scorePlayer2 = this.scorePlayer2 +1;
     }
     
+    /**
+     * fill area : a ship contains this area
+     * @param x : line number
+     * @param y : column number
+     * @param player : grid number to modify
+     */
+    public void location(int x, int y, int player)
+    {
+        if (player == 1)
+        {
+            this.Grid1[x][y] = 1;
+        }
+        else 
+        {
+            this.Grid2[x][y] = 1;
+        }
+    }
+    
+    /**
+     * An area is hit on this area
+     * @param x : line number
+     * @param y : column number
+     * @param player : grid number to modify
+     */
+    public void areaHit(int x, int y, int player)
+    {
+        
+        if (player == 1)
+        {
+            if (this.Grid1[x][y] != 1)
+            {
+                this.Grid1[x][y] = 2;
+            }
+            else 
+            {
+                this.Grid2[x][y] = 3;
+            }
+        }
+        else
+        {    
+            if (this.Grid2[x][y] != 1)
+            {
+                this.Grid2[x][y] = 2;
+            }
+            else 
+            {
+                this.Grid2[x][y] = 3;
+            } 
+        }
+    
+ 
     
     
 }
