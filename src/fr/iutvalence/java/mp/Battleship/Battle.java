@@ -5,6 +5,9 @@ package fr.iutvalence.java.mp.Battleship;
  * @author begous
  *
  */
+
+import java.util.Scanner;
+
 public class Battle
 {
     /**
@@ -46,12 +49,12 @@ public class Battle
      * 2 : empty and hit
      * 3 : contains ship and hit
      */
-    private int Grid1[][];
+    private int grid1[][];
     
     /**
      *  Player 2 grid with player1Grid[0][0] : area A1
      */
-    private int Grid2[][];
+    private int grid2[][];
     
     
     
@@ -72,7 +75,7 @@ public class Battle
          */
         int player1Grid[][] = new int[Battle.GRID_LENGTH][Battle.GRID_LENGTH] ; 
         
-        this.Grid1 = player1Grid;
+        this.grid1 = player1Grid;
         
         
         /**
@@ -81,7 +84,7 @@ public class Battle
          */
         int player2Grid[][] = new int[Battle.GRID_LENGTH][Battle.GRID_LENGTH] ;
         
-        this.Grid2 = player2Grid;
+        this.grid2 = player2Grid;
     }
     
     
@@ -157,16 +160,16 @@ public class Battle
     {
         if (player == 1)
         {
-            this.Grid1[x][y] = 1;
+            this.grid1[x][y] = 1;
         }
         else 
         {
-            this.Grid2[x][y] = 1;
+            this.grid2[x][y] = 1;
         }
     }
     
     /**
-     * An area is hit on this area
+     * An area is hit
      * @param x : line number
      * @param y : column number
      * @param player : grid number to modify
@@ -176,28 +179,48 @@ public class Battle
         
         if (player == 1)
         {
-            if (this.Grid1[x][y] != 1)
+            if (this.grid1[x][y] != 1)
             {
-                this.Grid1[x][y] = 2;
+                this.grid1[x][y] = 2;
             }
             else 
             {
-                this.Grid2[x][y] = 3;
+                this.grid2[x][y] = 3;
             }
         }
         else
         {    
-            if (this.Grid2[x][y] != 1)
+            if (this.grid2[x][y] != 1)
             {
-                this.Grid2[x][y] = 2;
+                this.grid2[x][y] = 2;
             }
             else 
             {
-                this.Grid2[x][y] = 3;
+                this.grid2[x][y] = 3;
             } 
         }
-    
+    }
  
+    
+    
+    /**
+     * The main : execute the program
+     * @param args
+     */
+    public static void main(String[] args)
+    {
+       
+       Battle game = new Battle();     
+       Ship S1 = new Ship(2);
+       S1.location();
+    }
+    
+    
+    
+    
+    
+    
+    
     
     
 }
