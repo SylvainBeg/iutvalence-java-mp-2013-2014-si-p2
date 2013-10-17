@@ -6,8 +6,6 @@ package fr.iutvalence.java.mp.Battleship;
  *
  */
 
-import java.util.Scanner;
-
 public class Battle
 {
     /**
@@ -27,8 +25,8 @@ public class Battle
      */
     private int nbTurn;
     
-    // TODO FIXED comply with naming conventions
     // TODO (fix) move constants declarations before fields
+    // TODO (fix) fix comment
     /**
      * Default number of battle 
      */
@@ -49,12 +47,12 @@ public class Battle
      * 2 : empty and hit
      * 3 : contains ship and hit
      */
-    private int grid1[][];
+    private int[][] grid1;
     
     /**
      *  Player 2 grid with player1Grid[0][0] : area A1
      */
-    private int grid2[][];
+    private int[][] grid2;
     
     
     
@@ -202,7 +200,8 @@ public class Battle
     }
  
     
-    
+    // TODO (fix) move the main to another class (called Main for example)
+    // TODO (think about it) the class Battle should only have one pucli method called "play"
     /**
      * The main : execute the program
      * @param args

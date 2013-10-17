@@ -9,6 +9,7 @@ import java.util.Scanner;
  */
 public class Ship
 {
+    // TODO (fix) detail comment
     /**
      * area number of ship
      */
@@ -23,7 +24,7 @@ public class Ship
         this.nbArea = area;    
     }
     
-    
+    // TODO (fix) the ship must not have any explicit dependency to keyboard
     /**
      * Place a ship on the player grid for a real player
      */
