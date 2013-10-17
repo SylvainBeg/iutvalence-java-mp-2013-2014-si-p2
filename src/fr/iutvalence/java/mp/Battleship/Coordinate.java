@@ -28,17 +28,15 @@ public class Coordinate
         this.y = y;        
     }
 
+    // TODO (fix) write comment
     public int getX()
     {
         return x;
     }
 
+    // TODO (fix) write comment
     public int getY()
     {
         return y;
     }
-    
-    
-    
-
 }

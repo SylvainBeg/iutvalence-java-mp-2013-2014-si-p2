@@ -10,13 +10,10 @@ import java.util.Random;
 
 public class Battle
 {
-    
-    // TODO FIXED move constants declarations before fields
-    // TODO FIXED fix comment
     /**
      * Default number of ship 
      */
-    private final static int SHIPS_DEFAULT = 5;
+    private final static int DEFAULT_SHIPS_AMOUNT = 5;
     
     // TODO FIXED comply with naming conventions
     // TODO FIXED move constants declarations before fields
@@ -29,19 +26,18 @@ public class Battle
     /**
      * Player 1 score ; number of ships sank at player 2 
      */
-    private int scorePlayer1;
+    private int player1Score;
 
     /**
      * Player 2 score ; number of ships sank at player 1 ; computer or human ?
      */
-    private int scorePlayer2;
+    private int player2Score;
     
     
-    // TODO (fix) rename field
     /**
      * Number of turns
      */
-    private int nbTurn;
+    private int numberOfTurns;
     
     
     /**
@@ -52,12 +48,12 @@ public class Battle
      * 2 : empty and hit
      * 3 : contains ship and hit
      */
-    private int[][] grid1;
+    private int[][] player1Grid;
     
     /**
      *  Player 2 grid with player1Grid[0][0] : area A1
      */
-    private int[][] grid2;
+    private int[][] player2Grid;
     
     
     
@@ -67,57 +63,56 @@ public class Battle
      */
     public Battle()
     {
-        this.nbTurn = 0;
-        this.scorePlayer1 = 0;
-        this.scorePlayer2 = 0;
+        this.numberOfTurns = 0;
+        this.player1Score = 0;
+        this.player2Score = 0;
         
-     // TODO FIXED initialize fields in constructors only
+        // TODO (fix) Javadoc comment are not allowed inside methods
         /**
          * Player 1 grid with player1Grid[0][0] : area A1
          * each area contains a number which defines its condition
          */
+        // TODO (fix) simplify
         int player1Grid[][] = new int[Battle.GRID_LENGTH][Battle.GRID_LENGTH] ; 
         
-        this.grid1 = player1Grid;
+        this.player1Grid = player1Grid;
         
-        
+        // TODO (fix) Javadoc comment are not allowed inside methods 
         /**
          * Player 2 grid with player2Grid[0][0] : area A1
          * each area contains a number which defines its condition
          */
+        // TODO (fix) simplify
         int player2Grid[][] = new int[Battle.GRID_LENGTH][Battle.GRID_LENGTH] ;
         
-        this.grid2 = player2Grid;
+        this.player2Grid = player2Grid;
     }
-    
-    
-    
     
     /**
      * return player 1 score
      * @return player 1 score
      */
-    public int getScorePlayer1()
+    public int getPlayer1Score()
     {
-        return this.scorePlayer1;
+        return this.player1Score;
     }
     
     /**
      * return player 2 score
      * @return player 2 score
      */
-    public int getScorePlayer2()
+    public int getPlayer2Score()
     {
-        return this.scorePlayer2;
+        return this.player2Score;
     }
     
     /**
      * return turn number
      * @return turn number
      */
-    public int getNbTurn()
+    public int getNumberOfTurns()
     {
-        return this.nbTurn;
+        return this.numberOfTurns;
     }
     
     /**
@@ -125,32 +120,33 @@ public class Battle
      */
     public void updateTurn()
     {
-        this.nbTurn = this.nbTurn +1;
+        this.numberOfTurns = this.numberOfTurns +1;
     }
     
+    // TODO (fix) let the constant be public and remove his getter
     /**
      * return ships default number, in order to calculate number of ships alive
      * @return ships default number
      */
     public int getShips_DEFAUT()
     {
-        return  Battle.SHIPS_DEFAULT;
+        return  Battle.DEFAULT_SHIPS_AMOUNT;
     }
     
     /**
      * When the player 1 sink ship at player 2
      */
-    public void updateScore1()
+    public void updatePlayer1Score()
     {
-        this.scorePlayer1 = this.scorePlayer1 +1;
+        this.player1Score = this.player1Score +1;
     }
     
     /**
      * When the player 2 sink ship at player 1
      */
-    public void updateScore2()
+    public void updatePlayer2Score()
     {
-        this.scorePlayer2 = this.scorePlayer2 +1;
+        this.player2Score = this.player2Score +1;
     }
     
     /**
@@ -163,11 +159,11 @@ public class Battle
     {
         if (player == 1)
         {
-            this.grid1[x][y] = 1;
+            this.player1Grid[x][y] = 1;
         }
         else 
         {
-            this.grid2[x][y] = 1;
+            this.player2Grid[x][y] = 1;
         }
     }
     
@@ -182,31 +178,30 @@ public class Battle
         
         if (player == 1)
         {
-            if (this.grid1[x][y] != 1)
+            if (this.player1Grid[x][y] != 1)
             {
-                this.grid1[x][y] = 2;
+                this.player1Grid[x][y] = 2;
             }
             else 
             {
-                this.grid2[x][y] = 3;
+                this.player2Grid[x][y] = 3;
             }
         }
         else
         {    
-            if (this.grid2[x][y] != 1)
+            if (this.player2Grid[x][y] != 1)
             {
-                this.grid2[x][y] = 2;
+                this.player2Grid[x][y] = 2;
             }
             else 
             {
-                this.grid2[x][y] = 3;
+                this.player2Grid[x][y] = 3;
             } 
         }
     }
  
     
-    // TODO (fix) move the main to another class (called Main for example)
-    // TODO (think about it) the class Battle should only have one public  method called "play"
+    // TODO (fix) the class Battle should only have one public  method called "play"
     /**
      * The main : execute the program
      * @param args

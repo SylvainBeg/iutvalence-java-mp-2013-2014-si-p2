@@ -7,6 +7,7 @@ package fr.iutvalence.java.mp.Battleship;
  */
 public class ShipArea
 {
+    // TODO (fix) use Coordinates instead of x and y
     /**
      * columns number (coordinate)
      */
