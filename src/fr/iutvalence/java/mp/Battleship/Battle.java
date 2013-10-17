@@ -1,5 +1,7 @@
 package fr.iutvalence.java.mp.Battleship;
 
+import java.util.Random;
+
 /**
  * It's a session. That represents a new game.
  * @author begous
@@ -8,6 +10,22 @@ package fr.iutvalence.java.mp.Battleship;
 
 public class Battle
 {
+    
+    // TODO FIXED move constants declarations before fields
+    // TODO FIXED fix comment
+    /**
+     * Default number of ship 
+     */
+    private final static int SHIPS_DEFAULT = 5;
+    
+    // TODO FIXED comply with naming conventions
+    // TODO FIXED move constants declarations before fields
+    /**
+     * Default length of grid
+     */
+    private final static int GRID_LENGTH = 10;
+    
+    
     /**
      * Player 1 score ; number of ships sank at player 2 
      */
@@ -25,19 +43,6 @@ public class Battle
      */
     private int nbTurn;
     
-    // TODO (fix) move constants declarations before fields
-    // TODO (fix) fix comment
-    /**
-     * Default number of battle 
-     */
-    private final static int SHIPS_DEFAULT = 5;
-    
-    // TODO FIXED comply with naming conventions
-    // TODO (fix) move constants declarations before fields
-    /**
-     * Default length of grid
-     */
-    private final static int GRID_LENGTH = 10;
     
     /**
      *  Player 1 grid with player1Grid[0][0] : area A1
@@ -201,17 +206,21 @@ public class Battle
  
     
     // TODO (fix) move the main to another class (called Main for example)
-    // TODO (think about it) the class Battle should only have one pucli method called "play"
+    // TODO (think about it) the class Battle should only have one public  method called "play"
     /**
      * The main : execute the program
      * @param args
      */
-    public static void main(String[] args)
+    public void play()
     {
-       
-       Battle game = new Battle();     
-       Ship S1 = new Ship(2);
-       S1.location();
+        Random r = new Random();
+        int x;
+        int y;
+        
+        ShipArea ship[] = new ShipArea[1];
+
+      
+        
     }
     
     
