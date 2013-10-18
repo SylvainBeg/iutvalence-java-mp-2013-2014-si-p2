@@ -28,15 +28,24 @@ public class Coordinate
         this.y = y;        
     }
 
-    // TODO (fix) write comment
+    // TODO FIXED write comment
+    /**
+     * return column number
+     * @return int : column number
+     */
     public int getX()
     {
-        return x;
+        return this.x;
     }
 
-    // TODO (fix) write comment
+    
+    // TODO FIXED write comment
+    /**
+     * return line number
+     * @return int : line number
+     */
     public int getY()
     {
-        return y;
+        return this.y;
     }
 }

@@ -7,65 +7,57 @@ package fr.iutvalence.java.mp.Battleship;
  */
 public class ShipArea
 {
-    // TODO (fix) use Coordinates instead of x and y
     /**
-     * columns number (coordinate)
+     * area coordinate
      */
-    private final int x;
-    
-    /**
-     * lines number (coordinate)
-     */
-    private final int y;
-    
+    private Coordinate c;
+
+
     /**
      * Contains area condition : hit or not
      */
     private boolean hit;
     
+    
     /**
      * Initialize a ShipArea
-     * @param x : columns number
-     * @param y : lines number
+     * @param c : area coordinate 
      */
-    public ShipArea(int x, int y)
+    public ShipArea(Coordinate c)
     {
-        this.x = x;
-        this.y = y;
+        this.c = c;
         this.hit = false;
     }
 
     
     /**
-     * An area is hit
-     * @return boolean : hot or not
+     * Say if ship is hit An area is hit
+     * @return boolean : hit or not
      */
     public boolean isHit()
     {
-        return hit;
+        return this.hit;
     }
 
 
     /**
-     * Say if ship is hit
-     * @param boolean hit
+     * Hit an area
+     * @param hit : new condition of area
      */
     public void setHit(boolean hit)
     {
         this.hit = hit;
     }
 
-
-    public int getX()
+    /**
+     * return area coordinate 
+     * @return Coordinate : area coordinate
+     */
+    public Coordinate getC()
     {
-        return x;
+        return this.c;
     }
-
-    public int getY()
-    {
-        return y;
-    }
-    
+ 
     
 
 }

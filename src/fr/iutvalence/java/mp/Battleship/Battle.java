@@ -13,7 +13,7 @@ public class Battle
     /**
      * Default number of ship 
      */
-    private final static int DEFAULT_SHIPS_AMOUNT = 5;
+    public final static int DEFAULT_SHIPS_AMOUNT = 5;
     
     // TODO FIXED comply with naming conventions
     // TODO FIXED move constants declarations before fields
@@ -67,25 +67,15 @@ public class Battle
         this.player1Score = 0;
         this.player2Score = 0;
         
-        // TODO (fix) Javadoc comment are not allowed inside methods
-        /**
-         * Player 1 grid with player1Grid[0][0] : area A1
-         * each area contains a number which defines its condition
-         */
-        // TODO (fix) simplify
-        int player1Grid[][] = new int[Battle.GRID_LENGTH][Battle.GRID_LENGTH] ; 
+        // TODO FIXED Javadoc comment are not allowed inside methods
+        // TODO FIXED simplify
         
-        this.player1Grid = player1Grid;
+        this.player1Grid = new int[Battle.GRID_LENGTH][Battle.GRID_LENGTH] ; 
         
-        // TODO (fix) Javadoc comment are not allowed inside methods 
-        /**
-         * Player 2 grid with player2Grid[0][0] : area A1
-         * each area contains a number which defines its condition
-         */
-        // TODO (fix) simplify
-        int player2Grid[][] = new int[Battle.GRID_LENGTH][Battle.GRID_LENGTH] ;
-        
-        this.player2Grid = player2Grid;
+        // TODO FIXED Javadoc comment are not allowed inside methods 
+        // TODO FIXED simplify
+
+        this.player2Grid =  new int[Battle.GRID_LENGTH][Battle.GRID_LENGTH] ;
     }
     
     /**
@@ -123,15 +113,6 @@ public class Battle
         this.numberOfTurns = this.numberOfTurns +1;
     }
     
-    // TODO (fix) let the constant be public and remove his getter
-    /**
-     * return ships default number, in order to calculate number of ships alive
-     * @return ships default number
-     */
-    public int getShips_DEFAUT()
-    {
-        return  Battle.DEFAULT_SHIPS_AMOUNT;
-    }
     
     /**
      * When the player 1 sink ship at player 2
@@ -149,70 +130,13 @@ public class Battle
         this.player2Score = this.player2Score +1;
     }
     
-    /**
-     * fill area : a ship contains this area
-     * @param x : line number
-     * @param y : column number
-     * @param player : grid number to modify
-     */
-    public void location(int x, int y, int player)
-    {
-        if (player == 1)
-        {
-            this.player1Grid[x][y] = 1;
-        }
-        else 
-        {
-            this.player2Grid[x][y] = 1;
-        }
-    }
+   
     
-    /**
-     * An area is hit
-     * @param x : line number
-     * @param y : column number
-     * @param player : grid number to modify
-     */
-    public void areaHit(int x, int y, int player)
-    {
-        
-        if (player == 1)
-        {
-            if (this.player1Grid[x][y] != 1)
-            {
-                this.player1Grid[x][y] = 2;
-            }
-            else 
-            {
-                this.player2Grid[x][y] = 3;
-            }
-        }
-        else
-        {    
-            if (this.player2Grid[x][y] != 1)
-            {
-                this.player2Grid[x][y] = 2;
-            }
-            else 
-            {
-                this.player2Grid[x][y] = 3;
-            } 
-        }
-    }
- 
+    // TODO FIXED the class Battle should only have one public  method called "play"
+
     
-    // TODO (fix) the class Battle should only have one public  method called "play"
-    /**
-     * The main : execute the program
-     * @param args
-     */
     public void play()
     {
-        Random r = new Random();
-        int x;
-        int y;
-        
-        ShipArea ship[] = new ShipArea[1];
 
       
         
