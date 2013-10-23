@@ -1,9 +1,7 @@
 package fr.iutvalence.java.mp.Battleship;
 
-import java.util.Random;
-
 /**
- * It's a session. That represents a new game.
+ * This class represents a new naval battle game.
  * @author begous
  *
  */
@@ -11,12 +9,10 @@ import java.util.Random;
 public class Battle
 {
     /**
-     * Default number of ship 
+     * Default number of ships
      */
-    public final static int DEFAULT_SHIPS_AMOUNT = 5;
+    public final static int DEFAULT_NUMBER_OF_SHIPS = 5;
     
-    // TODO FIXED comply with naming conventions
-    // TODO FIXED move constants declarations before fields
     /**
      * Default length of grid
      */
@@ -64,17 +60,11 @@ public class Battle
     public Battle()
     {
         this.numberOfTurns = 0;
+        
         this.player1Score = 0;
         this.player2Score = 0;
         
-        // TODO FIXED Javadoc comment are not allowed inside methods
-        // TODO FIXED simplify
-        
         this.player1Grid = new int[Battle.GRID_LENGTH][Battle.GRID_LENGTH] ; 
-        
-        // TODO FIXED Javadoc comment are not allowed inside methods 
-        // TODO FIXED simplify
-
         this.player2Grid =  new int[Battle.GRID_LENGTH][Battle.GRID_LENGTH] ;
     }
     
@@ -132,7 +122,7 @@ public class Battle
     
    
     
-    // TODO FIXED the class Battle should only have one public  method called "play"
+    // TODO fixed the class Battle should have **** only one public method **** called "play"
 
     
     public void play()

@@ -10,20 +10,23 @@ public class ShipArea
     /**
      * area coordinate
      */
-    private Coordinate c;
+   // TODO (fix) rename field (more explicit)
+    private Coordinates c;
 
 
+    // TODO (fix) rewrite comment (not clear)
     /**
      * Contains area condition : hit or not
      */
     private boolean hit;
     
-    
+    // TODO (fix) rewrite comment. Do not say that it initializes a ship
+    // but how the ship looks like once initialized
     /**
      * Initialize a ShipArea
      * @param c : area coordinate 
      */
-    public ShipArea(Coordinate c)
+    public ShipArea(Coordinates c)
     {
         this.c = c;
         this.hit = false;
@@ -32,7 +35,7 @@ public class ShipArea
     
     /**
      * Say if ship is hit An area is hit
-     * @return boolean : hit or not
+     * @return hit or not
      */
     public boolean isHit()
     {
@@ -42,7 +45,7 @@ public class ShipArea
 
     /**
      * Hit an area
-     * @param hit : new condition of area
+     * @param hit new condition of area
      */
     public void setHit(boolean hit)
     {
@@ -53,7 +56,8 @@ public class ShipArea
      * return area coordinate 
      * @return Coordinate : area coordinate
      */
-    public Coordinate getC()
+    // TODO (fix) rename method (more explicit)
+    public Coordinates getC()
     {
         return this.c;
     }

@@ -5,7 +5,7 @@ package fr.iutvalence.java.mp.Battleship;
  * @author begous
  *
  */
-public class Coordinate
+public class Coordinates
 {
     /**
      * Columns number
@@ -17,32 +17,30 @@ public class Coordinate
      */
     private final int y;
     
+    // TODO (fix) fix comment, this class is not only related to ships
     /**
      * Ship coordinate
      * @param x : column number
      * @param y : line number
      */
-    public Coordinate(int x, int y)
+    public Coordinates(int x, int y)
     {
         this.x = x;
         this.y = y;        
     }
 
-    // TODO FIXED write comment
     /**
      * return column number
-     * @return int : column number
+     * @return column number
      */
     public int getX()
     {
         return this.x;
     }
 
-    
-    // TODO FIXED write comment
     /**
      * return line number
-     * @return int : line number
+     * @return line number
      */
     public int getY()
     {
