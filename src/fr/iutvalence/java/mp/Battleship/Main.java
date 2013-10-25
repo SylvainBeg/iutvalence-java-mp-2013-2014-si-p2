@@ -13,7 +13,7 @@ public class Main
      */
     public static void main(String[] args)
     {
-        Coordinates c1 = new Coordinates(5,2); 
+       /* Coordinates c1 = new Coordinates(5,2); 
         ShipArea area1 = new ShipArea(c1);
         
         Coordinates c2 = new Coordinates(5,3); 
@@ -24,7 +24,7 @@ public class Main
         
         ShipArea shipArea1[] = {area1, area2, area3};
         
-        Ship ship1 = new Ship(shipArea1);
+        Ship ship1 = new Ship(shipArea1);*/
 
     }
 }

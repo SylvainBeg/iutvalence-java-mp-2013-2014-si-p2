@@ -1,5 +1,7 @@
 package fr.iutvalence.java.mp.Battleship;
 
+import java.util.Random;
+
 /**
  * This class represents a new naval battle game.
  * @author begous
@@ -35,7 +37,12 @@ public class Battle
      */
     private int numberOfTurns;
     
+    /**
+     * player ship list
+     */
+    private Ship[] arrayShip;
     
+   /* 
     /**
      *  Player 1 grid with player1Grid[0][0] : area A1
      * each area contains a number which defines its condition
@@ -43,14 +50,14 @@ public class Battle
      * 1 : contains ship and not hit
      * 2 : empty and hit
      * 3 : contains ship and hit
-     */
+     *
     private int[][] player1Grid;
     
     /**
      *  Player 2 grid with player1Grid[0][0] : area A1
-     */
+     *
     private int[][] player2Grid;
-    
+    */
     
     
     // TODO FIXED initial field values should be set in constructors
@@ -64,8 +71,14 @@ public class Battle
         this.player1Score = 0;
         this.player2Score = 0;
         
-        this.player1Grid = new int[Battle.GRID_LENGTH][Battle.GRID_LENGTH] ; 
+        
+
+        
+        
+        
+        /*this.player1Grid = new int[Battle.GRID_LENGTH][Battle.GRID_LENGTH] ; 
         this.player2Grid =  new int[Battle.GRID_LENGTH][Battle.GRID_LENGTH] ;
+        */
     }
     
     /**
@@ -132,8 +145,16 @@ public class Battle
         
     }
     
-    
-    
+    /**
+     * 
+     * Research in ships the targeted area. Target the ship with Ship.isHitArea and update ship
+     * @param  c  coordinate of targeted area
+     * @return true if coordinate found and so sip hit, else false (coordinate not found in the ship) 
+     */
+    public boolean isHitShip(Coordinates c)
+    {
+        
+    }
     
     
     

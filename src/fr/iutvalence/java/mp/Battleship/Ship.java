@@ -1,5 +1,7 @@
 package fr.iutvalence.java.mp.Battleship;
 
+import java.util.Random;
+
 
 // TODO (fix) detail comment, it is not understandable as is
 /**
@@ -12,18 +14,16 @@ public class Ship
     /**
      * Ship array : contain area ship (in order or in disorder)
      */
-    // TODO (fix) rename field (more explicit)
-    private ShipArea[] shipArray;
+    // TODO FIXED rename field (more explicit)
+    private ShipArea[] array;
     
-    // TODO (fix) detail comment (how is the ship once created?)
+    // TODO FIXED detail comment (how is the ship once created?)
     /**
-     * Initialize a ship.
-     * @param ship array which contains a ship
+     * Initialize a ship then created by locationShip()
      */
-    // TODO (fix) rename parameter(this is not a ship)
-    public Ship(ShipArea[] ship)
+    // TODO FIXED rename parameter(this is not a ship)
+    public Ship()
     {
-        this.shipArray = ship;
     }
     
     /**
@@ -31,19 +31,19 @@ public class Ship
      * @param  c  coordinate of targeted area
      * @return true if ship is hit, else false (coordinate not found in the ship) 
      */
-    // TODO (fix) comply with naming conventions
-    // TODO (fix) rename method (Is...)
-    public boolean ShipIsHit(Coordinates c)
+    // TODO FIXED comply with naming conventions
+    // TODO FIXED rename method (Is...)
+    public boolean isHitArea(Coordinates c)
     {
         int i = 0;
-        while (i < this.shipArray.length && this.shipArray[i].getC() != c)
+        while (i < this.array.length && this.array[i].getCouple() != c)
         {
             i = i+1;
         }
         
-        if (i < this.shipArray.length)
+        if (i < this.array.length)
         {
-            this.shipArray[i].setHit(true);
+            this.array[i].setHit(true);
             return true;
         }
         // TODO (fix) simplify
@@ -52,4 +52,51 @@ public class Ship
             return false;
         }
     }
+    
+    
+    /** place a ship in the grid
+     * @param n :area number of ship to create
+     * @return array which represents a ship which can be create
+     */
+    public void locationShip(int n)
+    {
+        Random r = new Random();
+        int position = r.nextInt(1); // 0 : horizontal and 1 : vertical
+        int x;
+        int y;
+        int i = 0;
+        Coordinates couple;
+        ShipArea[] ship = new ShipArea[n];
+        
+        if (position == 0)
+        {
+            x = 1 + r.nextInt(10 - (n-1));
+            y = 1 + r.nextInt(10);
+            couple = new Coordinates(x, y);
+            while (i < n)
+            {
+                ship[i] = new ShipArea(couple);
+                i = i+1;
+                x=x+1;
+                couple = new Coordinates(x, y);
+            }
+            this.array = ship;
+        }
+        else
+        {
+            x = r.nextInt(9);
+            y = 1 + r.nextInt(10 - (n-1));
+            couple = new Coordinates(x, y);
+            while (i < n)
+            {
+                ship[i] = new ShipArea(couple);
+                i = i+1;
+                y=y+1;
+                couple = new Coordinates(x, y);
+            }
+            this.array = ship;
+        }
+    }
+    
+    
 }

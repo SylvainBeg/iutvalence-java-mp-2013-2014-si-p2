@@ -10,25 +10,26 @@ public class ShipArea
     /**
      * area coordinate
      */
-   // TODO (fix) rename field (more explicit)
-    private Coordinates c;
+   // TODO FIXED rename field (more explicit)
+    private Coordinates couple;
 
 
-    // TODO (fix) rewrite comment (not clear)
+    // TODO FIXED rewrite comment (not clear)
     /**
-     * Contains area condition : hit or not
+     * Contains area condition : if player touched area, it's True
      */
     private boolean hit;
     
-    // TODO (fix) rewrite comment. Do not say that it initializes a ship
+    // TODO FIXED rewrite comment. Do not say that it initializes a ship
     // but how the ship looks like once initialized
     /**
-     * Initialize a ShipArea
+     * ShipArea has a couple of coordinate, give in parameter, which defines this 
+     * position in the grid and it has the boolean False in "hit"
      * @param c : area coordinate 
      */
     public ShipArea(Coordinates c)
     {
-        this.c = c;
+        this.couple = c;
         this.hit = false;
     }
 
@@ -56,10 +57,10 @@ public class ShipArea
      * return area coordinate 
      * @return Coordinate : area coordinate
      */
-    // TODO (fix) rename method (more explicit)
-    public Coordinates getC()
+    // TODO FIXED rename method (more explicit)
+    public Coordinates getCouple()
     {
-        return this.c;
+        return this.couple;
     }
  
     

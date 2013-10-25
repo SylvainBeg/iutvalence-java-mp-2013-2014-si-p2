@@ -17,9 +17,9 @@ public class Coordinates
      */
     private final int y;
     
-    // TODO (fix) fix comment, this class is not only related to ships
+    // TODO FIXED fix comment, this class is not only related to ships
     /**
-     * Ship coordinate
+     * Coordinate for a couple which identify an area in the grid
      * @param x : column number
      * @param y : line number
      */
