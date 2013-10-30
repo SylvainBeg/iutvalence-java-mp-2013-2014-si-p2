@@ -2,45 +2,47 @@ package fr.iutvalence.java.mp.Battleship;
 
 import java.util.Random;
 
-
 // TODO (fix) detail comment, it is not understandable as is
 /**
  * Declaration a ship which contains areas.
+ * 
  * @author begous
- *
+ * 
  */
 public class Ship
-{    
+{
     /**
      * Ship array : contain area ship (in order or in disorder)
      */
-    // TODO FIXED rename field (more explicit)
+    // TODO (fix) rename field (more explicit with regards to the game)
     private ShipArea[] array;
-    
-    // TODO FIXED detail comment (how is the ship once created?)
+
+    // TODO (fix) rewrite comment (how is the ship once created?)
     /**
      * Initialize a ship then created by locationShip()
      */
-    // TODO FIXED rename parameter(this is not a ship)
     public Ship()
     {
+        // TODO (fix) all fields must be initialized
     }
-    
+
     /**
      * Research if targeted area is contained in the ship and if yes, touched it
-     * @param  c  coordinate of targeted area
-     * @return true if ship is hit, else false (coordinate not found in the ship) 
+     * 
+     * @param c
+     *            coordinate of targeted area
+     * @return true if ship is hit, else false (coordinate not found in the
+     *         ship)
      */
-    // TODO FIXED comply with naming conventions
-    // TODO FIXED rename method (Is...)
-    public boolean isHitArea(Coordinates c)
+    // TODO (fix) use exception to handle bad coordinates
+    public boolean isHitAt(Coordinates c)
     {
         int i = 0;
         while (i < this.array.length && this.array[i].getCouple() != c)
         {
-            i = i+1;
+            i = i + 1;
         }
-        
+
         if (i < this.array.length)
         {
             this.array[i].setHit(true);
@@ -52,10 +54,12 @@ public class Ship
             return false;
         }
     }
-    
-    
-    /** place a ship in the grid
-     * @param n :area number of ship to create
+
+    /**
+     * place a ship in the grid
+     * 
+     * @param n
+     *            :area number of ship to create
      * @return array which represents a ship which can be create
      */
     public void locationShip(int n)
@@ -67,17 +71,17 @@ public class Ship
         int i = 0;
         Coordinates couple;
         ShipArea[] ship = new ShipArea[n];
-        
+
         if (position == 0)
         {
-            x = 1 + r.nextInt(10 - (n-1));
+            x = 1 + r.nextInt(10 - (n - 1));
             y = 1 + r.nextInt(10);
             couple = new Coordinates(x, y);
             while (i < n)
             {
                 ship[i] = new ShipArea(couple);
-                i = i+1;
-                x=x+1;
+                i = i + 1;
+                x = x + 1;
                 couple = new Coordinates(x, y);
             }
             this.array = ship;
@@ -85,18 +89,17 @@ public class Ship
         else
         {
             x = r.nextInt(9);
-            y = 1 + r.nextInt(10 - (n-1));
+            y = 1 + r.nextInt(10 - (n - 1));
             couple = new Coordinates(x, y);
             while (i < n)
             {
                 ship[i] = new ShipArea(couple);
-                i = i+1;
-                y=y+1;
+                i = i + 1;
+                y = y + 1;
                 couple = new Coordinates(x, y);
             }
             this.array = ship;
         }
     }
-    
-    
+
 }

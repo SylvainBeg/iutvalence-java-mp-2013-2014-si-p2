@@ -2,30 +2,30 @@ package fr.iutvalence.java.mp.Battleship;
 
 /**
  * Represents an area of ship. A ship is composed to some "ShipArea"
+ * 
  * @author begous
- *
+ * 
  */
 public class ShipArea
 {
     /**
      * area coordinate
      */
-   // TODO FIXED rename field (more explicit)
+    // TODO (fix) rename field (more explicit with regards to what a shipArea is)
     private Coordinates couple;
 
-
-    // TODO FIXED rewrite comment (not clear)
     /**
      * Contains area condition : if player touched area, it's True
      */
     private boolean hit;
-    
-    // TODO FIXED rewrite comment. Do not say that it initializes a ship
-    // but how the ship looks like once initialized
+
+    // TODO (fix) rewrite comment (shipArea is not a couple of coordinates)
     /**
-     * ShipArea has a couple of coordinate, give in parameter, which defines this 
-     * position in the grid and it has the boolean False in "hit"
-     * @param c : area coordinate 
+     * ShipArea has a couple of coordinate, give in parameter, which defines
+     * this position in the grid and it has the boolean False in "hit"
+     * 
+     * @param c
+     *            : area coordinate
      */
     public ShipArea(Coordinates c)
     {
@@ -33,9 +33,10 @@ public class ShipArea
         this.hit = false;
     }
 
-    
+    // TODO (fix) rewrite comment (not understandable)
     /**
      * Say if ship is hit An area is hit
+     * 
      * @return hit or not
      */
     public boolean isHit()
@@ -43,10 +44,11 @@ public class ShipArea
         return this.hit;
     }
 
-
     /**
      * Hit an area
-     * @param hit new condition of area
+     * 
+     * @param hit
+     *            new condition of area
      */
     public void setHit(boolean hit)
     {
@@ -54,15 +56,14 @@ public class ShipArea
     }
 
     /**
-     * return area coordinate 
+     * return area coordinate
+     * 
      * @return Coordinate : area coordinate
      */
-    // TODO FIXED rename method (more explicit)
+    // TODO (fix) rename method (more explicit with regards to what a shipArea is)
     public Coordinates getCouple()
     {
         return this.couple;
     }
- 
-    
 
 }
