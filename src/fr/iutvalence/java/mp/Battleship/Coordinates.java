@@ -1,8 +1,8 @@
 package fr.iutvalence.java.mp.Battleship;
 
-// TODO ((fix) rewrite comment (wrong description)
+// TODO FIXED rewrite comment (wrong description)
 /**
- * Represents a coordinate : an area
+ * Represents a position in the grid with a column number and a line number. This position is the area position (only one).
  * 
  * @author begous
  * 
@@ -19,14 +19,12 @@ public class Coordinates
      */
     private final int line;
 
-    // TODO (fix) rewrite comment (not understandable)
+    // TODO FIXED rewrite comment (not understandable)
     /**
-     * Coordinate for a couple which identify an area in the grid
+     * Represents an unique position in the grid with a column number and a line number (given a parameter).
      * 
-     * @param column0
-     *            : column number
-     * @param line0
-     *            : line number
+     * @param column0 : column number
+     * @param line0 : line number
      */
     public Coordinates(int column0, int line0)
     {

@@ -2,10 +2,9 @@ package fr.iutvalence.java.mp.Battleship;
 
 import java.util.Random;
 
-// TODO (fix) detail comment, it is not understandable as is
+// TODO  FIXED detail comment, it is not understandable as is
 /**
- * Declaration a ship which contains areas.
- * 
+ * A Ship is an array of ShipArea :  a ship is divided in several part 
  * @author begous
  * 
  */
@@ -38,7 +37,7 @@ public class Ship
     public boolean isHitAt(Coordinates c)
     {
         int i = 0;
-        while (i < this.array.length && this.array[i].getCouple() != c)
+        while (i < this.array.length && this.array[i].getPosition() != c)
         {
             i = i + 1;
         }
@@ -58,8 +57,7 @@ public class Ship
     /**
      * place a ship in the grid
      * 
-     * @param n
-     *            :area number of ship to create
+     * @param n :area number of ship to create
      * @return array which represents a ship which can be create
      */
     public void locationShip(int n)
@@ -74,8 +72,8 @@ public class Ship
 
         if (position == 0)
         {
-            x = 1 + r.nextInt(10 - (n - 1));
-            y = 1 + r.nextInt(10);
+            x = 1 + r.nextInt(10 -n);
+            y = 1 + r.nextInt(9);
             couple = new Coordinates(x, y);
             while (i < n)
             {
@@ -88,8 +86,8 @@ public class Ship
         }
         else
         {
-            x = r.nextInt(9);
-            y = 1 + r.nextInt(10 - (n - 1));
+            x = 1 + r.nextInt(9);
+            y = 1 + r.nextInt(10 - n);
             couple = new Coordinates(x, y);
             while (i < n)
             {
