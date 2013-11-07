@@ -6,14 +6,14 @@ package fr.iutvalence.java.mp.Battleship;
  * @author begous
  * 
  */
-// TODO (fix) this class should only have one public metod called 'play' that allows
+// TODO FIXED this class should only have one public metod called 'play' that allows
 // to start and play a game. Every other method should be private (for internal use only)
 public class Battle
 {
     /**
      * Default number of ships
      */
-    public final static int DEFAULT_NUMBER_OF_SHIPS = 5;
+    private final static int DEFAULT_NUMBER_OF_SHIPS = 5;
 
     /**
      * Default size of grid
@@ -36,15 +36,21 @@ public class Battle
     private int numberOfTurns;
 
     /**
-     * player ship list
+     * player 1 ship list
      */
-    // TODO (fix) there are two players but only one ship list?
-    private Ship[] arrayShip;
+    // TODO FIXED there are two players but only one ship list?
+    private Ship[] Player1Ship;
 
-   
-    // TODO (fix) rewrite comment
     /**
-     * Begin a game
+     * player 2 ship list
+     */
+    private Ship[] Player2Ship;
+    
+    
+   
+    // TODO FIXED rewrite comment
+    /**
+     * Initialize a game (initialize scores and turn number)
      */
     public Battle()
     {
@@ -64,7 +70,7 @@ public class Battle
      * 
      * @return player 1 score
      */
-    public int getPlayer1Score()
+    private int getPlayer1Score()
     {
         return this.player1Score;
     }
@@ -74,7 +80,7 @@ public class Battle
      * 
      * @return player 2 score
      */
-    public int getPlayer2Score()
+    private int getPlayer2Score()
     {
         return this.player2Score;
     }
@@ -84,7 +90,7 @@ public class Battle
      * 
      * @return turn number
      */
-    public int getNumberOfTurns()
+    private int getNumberOfTurns()
     {
         return this.numberOfTurns;
     }
@@ -92,7 +98,7 @@ public class Battle
     /**
      * Add a turn
      */
-    public void updateTurn()
+    private void updateTurn()
     {
         this.numberOfTurns = this.numberOfTurns + 1;
     }
@@ -100,7 +106,7 @@ public class Battle
     /**
      * When the player 1 sink ship at player 2
      */
-    public void updatePlayer1Score()
+    private void updatePlayer1Score()
     {
         this.player1Score = this.player1Score + 1;
     }
@@ -108,7 +114,7 @@ public class Battle
     /**
      * When the player 2 sink ship at player 1
      */
-    public void updatePlayer2Score()
+    private void updatePlayer2Score()
     {
         this.player2Score = this.player2Score + 1;
     }
@@ -126,12 +132,11 @@ public class Battle
      * Research in ships the targeted area. Target the ship with Ship.isHitArea
      * and update ship
      * 
-     * @param c
-     *            coordinate of targeted area
-     * @return true if coordinate found and so sip hit, else false (coordinate
+     * @param c  coordinate of targeted area
+     * @return true if coordinate found and so ship hit, else false (coordinate
      *         not found in the ship)
      */
-    public boolean isHitShip(Coordinates c)
+    private boolean isHitShip(Coordinates c)
     {
 
     }

@@ -13,8 +13,8 @@ public class Ship
     /**
      * Ship array : contain area ship (in order or in disorder)
      */
-    // TODO (fix) rename field (more explicit with regards to the game)
-    private ShipArea[] array;
+    // TODO FIXED rename field (more explicit with regards to the game)
+    private ShipArea[] boat;
 
     // TODO (fix) rewrite comment (how is the ship once created?)
     /**
@@ -23,28 +23,27 @@ public class Ship
     public Ship()
     {
         // TODO (fix) all fields must be initialized
+        
     }
 
     /**
      * Research if targeted area is contained in the ship and if yes, touched it
      * 
-     * @param c
-     *            coordinate of targeted area
-     * @return true if ship is hit, else false (coordinate not found in the
-     *         ship)
+     * @param c  coordinate of targeted area
+     * @return true if ship is hit, else false (coordinate not found in the ship)
      */
     // TODO (fix) use exception to handle bad coordinates
     public boolean isHitAt(Coordinates c)
     {
         int i = 0;
-        while (i < this.array.length && this.array[i].getPosition() != c)
+        while (i < this.boat.length && this.boat[i].getPosition() != c)
         {
             i = i + 1;
         }
 
-        if (i < this.array.length)
+        if (i < this.boat.length)
         {
-            this.array[i].setHit(true);
+            this.boat[i].setHit(true);
             return true;
         }
         // TODO (fix) simplify
@@ -58,7 +57,6 @@ public class Ship
      * place a ship in the grid
      * 
      * @param n :area number of ship to create
-     * @return array which represents a ship which can be create
      */
     public void locationShip(int n)
     {
@@ -82,7 +80,7 @@ public class Ship
                 x = x + 1;
                 couple = new Coordinates(x, y);
             }
-            this.array = ship;
+            this.boat = ship;
         }
         else
         {
@@ -96,7 +94,7 @@ public class Ship
                 y = y + 1;
                 couple = new Coordinates(x, y);
             }
-            this.array = ship;
+            this.boat = ship;
         }
     }
 
