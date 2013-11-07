@@ -8,7 +8,7 @@ import java.util.Random;
  * @author begous
  * 
  */
-public class Ship
+public class Ship 
 {
     /**
      * Ship array : contain area ship (in order or in disorder)

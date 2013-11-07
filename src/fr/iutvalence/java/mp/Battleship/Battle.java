@@ -31,7 +31,7 @@ public class Battle
     private int player2Score;
 
     /**
-     * Number of turns
+     * Number of turns 
      */
     private int numberOfTurns;
 
