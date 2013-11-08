@@ -16,14 +16,15 @@ public class Ship
     // TODO FIXED rename field (more explicit with regards to the game)
     private ShipArea[] boat;
 
-    // TODO (fix) rewrite comment (how is the ship once created?)
+    // TODO FIXED rewrite comment (how is the ship once created?)
     /**
-     * Initialize a ship then created by locationShip()
+     * Initialize a ship with a ship area array (ship free in the grid) in parameter
+     * @param ship : a ship (ship area array) ready to be place
      */
-    public Ship()
+    public Ship(ShipArea[] ship)
     {
-        // TODO (fix) all fields must be initialized
-        
+        // TODO FIXED  all fields must be initialized       
+        this.boat = ship;
     }
 
     /**
@@ -53,48 +54,27 @@ public class Ship
         }
     }
 
+    
     /**
-     * place a ship in the grid
-     * 
-     * @param n :area number of ship to create
+     * Research if a ship is sank : if all ship areas are hit.
+     * @return ship condition (sank or not)
      */
-    public void locationShip(int n)
-    {
-        Random r = new Random();
-        int position = r.nextInt(1); // 0 : horizontal and 1 : vertical
-        int x;
-        int y;
-        int i = 0;
-        Coordinates couple;
-        ShipArea[] ship = new ShipArea[n];
-
-        if (position == 0)
+    public boolean SankShip()
+    {  
+        int i =0;
+        
+        while (i < this.boat.length && this.boat[i].isHit() )
         {
-            x = 1 + r.nextInt(10 -n);
-            y = 1 + r.nextInt(9);
-            couple = new Coordinates(x, y);
-            while (i < n)
-            {
-                ship[i] = new ShipArea(couple);
-                i = i + 1;
-                x = x + 1;
-                couple = new Coordinates(x, y);
-            }
-            this.boat = ship;
+                i = i+1;
+        }
+        
+        if (i < this.boat.length)
+        {
+            return false;
         }
         else
         {
-            x = 1 + r.nextInt(9);
-            y = 1 + r.nextInt(10 - n);
-            couple = new Coordinates(x, y);
-            while (i < n)
-            {
-                ship[i] = new ShipArea(couple);
-                i = i + 1;
-                y = y + 1;
-                couple = new Coordinates(x, y);
-            }
-            this.boat = ship;
+            return true;
         }
     }
 
