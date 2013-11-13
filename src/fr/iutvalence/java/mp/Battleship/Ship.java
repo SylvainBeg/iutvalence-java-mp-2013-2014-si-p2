@@ -1,8 +1,6 @@
 package fr.iutvalence.java.mp.Battleship;
 
-import java.util.Random;
 
-// TODO  FIXED detail comment, it is not understandable as is
 /**
  * A Ship is an array of ShipArea :  a ship is divided in several part 
  * @author begous
@@ -13,18 +11,15 @@ public class Ship
     /**
      * Ship array : contain area ship (in order or in disorder)
      */
-    // TODO FIXED rename field (more explicit with regards to the game)
-    private ShipArea[] boat;
+    private ShipArea[] positions;
 
-    // TODO FIXED rewrite comment (how is the ship once created?)
     /**
      * Initialize a ship with a ship area array (ship free in the grid) in parameter
      * @param ship : a ship (ship area array) ready to be place
      */
     public Ship(ShipArea[] ship)
-    {
-        // TODO FIXED  all fields must be initialized       
-        this.boat = ship;
+    {       
+        this.positions = ship;
     }
 
     /**
@@ -37,14 +32,15 @@ public class Ship
     public boolean isHitAt(Coordinates c)
     {
         int i = 0;
-        while (i < this.boat.length && this.boat[i].getPosition() != c)
+        // TODO (fix) rewrite the loop as a for
+        while (i < this.positions.length && this.positions[i].getPosition() != c)
         {
             i = i + 1;
         }
 
-        if (i < this.boat.length)
+        if (i < this.positions.length)
         {
-            this.boat[i].setHit(true);
+            this.positions[i].setHit(true);
             return true;
         }
         // TODO (fix) simplify
@@ -56,19 +52,20 @@ public class Ship
 
     
     /**
-     * Research if a ship is sank : if all ship areas are hit.
+     * Research if a ship is sunk : if all ship areas are hit.
      * @return ship condition (sank or not)
      */
-    public boolean SankShip()
+    public boolean isShipSunk()
     {  
-        int i =0;
-        
-        while (i < this.boat.length && this.boat[i].isHit() )
+        int i = 0;
+        // TODO (fix) rewrite the loop as a for
+        while (i < this.positions.length && this.positions[i].isHit() )
         {
                 i = i+1;
         }
         
-        if (i < this.boat.length)
+        // TODO (fix) simplify
+        if (i < this.positions.length)
         {
             return false;
         }

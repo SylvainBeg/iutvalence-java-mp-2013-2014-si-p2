@@ -11,7 +11,6 @@ public class ShipArea
     /**
      * area coordinate
      */
-    // TODO FIXED rename field (more explicit with regards to what a shipArea is)
     private Coordinates position;
 
     /**
@@ -19,7 +18,6 @@ public class ShipArea
      */
     private boolean hit;
 
-    // TODO FIXED rewrite comment (shipArea is not a couple of coordinates)
     /**
      * ShipArea represents ship area and contains a position (given in parameter)
      * in the grid and a condition (not touched at first)
@@ -31,8 +29,7 @@ public class ShipArea
         this.position = c;
         this.hit = false;
     }
-
-    // TODO FIXED rewrite comment (not understandable)
+    
     /**
      * return area condition (touched or not)
      * 
@@ -58,7 +55,6 @@ public class ShipArea
      * 
      * @return Coordinate : area coordinate
      */
-    // TODO FIXED rename method (more explicit with regards to what a shipArea is)
     public Coordinates getPosition()
     {
         return this.position;

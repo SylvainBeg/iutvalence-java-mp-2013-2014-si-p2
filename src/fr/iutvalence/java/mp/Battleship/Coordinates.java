@@ -1,6 +1,5 @@
 package fr.iutvalence.java.mp.Battleship;
 
-// TODO FIXED rewrite comment (wrong description)
 /**
  * Represents a position in the grid with a column number and a line number. This position is the area position (only one).
  * 
@@ -19,7 +18,6 @@ public class Coordinates
      */
     private final int line;
 
-    // TODO FIXED rewrite comment (not understandable)
     /**
      * Represents an unique position in the grid with a column number and a line number (given a parameter).
      * 
