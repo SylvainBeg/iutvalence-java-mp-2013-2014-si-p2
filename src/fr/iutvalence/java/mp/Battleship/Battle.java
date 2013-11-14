@@ -194,43 +194,43 @@ public class Battle
     private ShipArea[] locationShip(int shipSize)
     {
         Random r = new Random();
-        // TODO (fix) rename variable (this is not a position)
-        int position = r.nextInt(1); // 0 : horizontal and 1 : vertical
+        // TODO FIXED rename variable (this is not a position)
+        int direction = r.nextInt(1); // 0 : horizontal and 1 : vertical
         int x;
         int y;
         
-        // TODO (fix) rename variable
-        int i = 0;
-        // TODO (fix) rename variable
-        Coordinates couple;
+        // TODO FIXED rename variable
+        int cursor = 0;
+        // TODO FIXED rename variable
+        Coordinates position;
         ShipArea[] ship = new ShipArea[shipSize];
 
-        // TODO (fix) declare hard-coded values as constants
-        if (position == 0)
+        // TODO FIXED declare hard-coded values as constants
+        if (direction == 0)
         {
-            x = 1 + r.nextInt(10 -shipSize);
-            y = 1 + r.nextInt(9);
-            couple = new Coordinates(x, y);
-            while (i < shipSize)
+            x = 1 + r.nextInt(DEFAULT_GRID_SIZE -shipSize);
+            y = 1 + r.nextInt(DEFAULT_GRID_SIZE-1);
+            position = new Coordinates(x, y);
+            while (cursor < shipSize)
             {
-                ship[i] = new ShipArea(couple);
-                i = i + 1;
+                ship[cursor] = new ShipArea(position);
+                cursor = cursor + 1;
                 x = x + 1;
-                couple = new Coordinates(x, y);
+                position = new Coordinates(x, y);
             }
             return ship;
         }
         else
         {
-            x = 1 + r.nextInt(9);
-            y = 1 + r.nextInt(10 - shipSize);
-            couple = new Coordinates(x, y);
-            while (i < shipSize)
+            x = 1 + r.nextInt(DEFAULT_GRID_SIZE-1);
+            y = 1 + r.nextInt(DEFAULT_GRID_SIZE - shipSize);
+            position = new Coordinates(x, y);
+            while (cursor < shipSize)
             {
-                ship[i] = new ShipArea(couple);
-                i = i + 1;
+                ship[cursor] = new ShipArea(position);
+                cursor = cursor + 1;
                 y = y + 1;
-                couple = new Coordinates(x, y);
+                position = new Coordinates(x, y);
             }
             return ship;
         }
