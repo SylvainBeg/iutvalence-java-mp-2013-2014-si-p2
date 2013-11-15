@@ -21,65 +21,32 @@ public class Battle
     private final static int DEFAULT_GRID_SIZE = 10;
 
     /**
-     * Player 1 score ; number of ships sank at player 2
-     */
-    private int player1Score;
-
-    /**
-     * Player 2 score ; number of ships sank at player 1 ; computer or human ?
-     */
-    private int player2Score;
-
-    /**
      * Number of turns 
      */
     private int numberOfTurns;
 
     /**
-     * player 1 ship list
+     * Informations about players 
      */
-    private Ship[] Player1Ship;
-
-    /**
-     * player 2 ship list
-     */
-    private Ship[] Player2Ship;
+    private PlayerInfo[] players;
+    
     
     /**
      * Initialize a game (initialize scores and turn number)
+     * @param shipsP1 player 1 ships to create
+     * @param shipsP2 player 2 ships to create
      */
-    public Battle()
+    public Battle(Ship[] shipsP1, Ship[] shipsP2)
     {
         this.numberOfTurns = 0;
+        this.players[1] = new PlayerInfo(shipsP1);
+        this.players[2] = new PlayerInfo(shipsP2);
+        
+        
 
-        this.player1Score = 0;
-        this.player2Score = 0;
-
-        /*
-         * this.player1Grid = new int[Battle.GRID_LENGTH][Battle.GRID_LENGTH] ;
-         * this.player2Grid = new int[Battle.GRID_LENGTH][Battle.GRID_LENGTH] ;
-         */
     }
 
-    /**
-     * return player 1 score
-     * 
-     * @return player 1 score
-     */
-    private int getPlayer1Score()
-    {
-        return this.player1Score;
-    }
-
-    /**
-     * return player 2 score
-     * 
-     * @return player 2 score
-     */
-    private int getPlayer2Score()
-    {
-        return this.player2Score;
-    }
+  
 
     /**
      * return turn number
@@ -99,21 +66,7 @@ public class Battle
         this.numberOfTurns = this.numberOfTurns + 1;
     }
 
-    /**
-     * When the player 1 sink ship at player 2
-     */
-    private void updatePlayer1Score()
-    {
-        this.player1Score = this.player1Score + 1;
-    }
-
-    /**
-     * When the player 2 sink ship at player 1
-     */
-    private void updatePlayer2Score()
-    {
-        this.player2Score = this.player2Score + 1;
-    }
+    
     
     public void play()
     {
@@ -139,19 +92,18 @@ public class Battle
     {
         int i = 0;
      
-        // TODO (think about it) you can reduce redundant code by 
+        // TODO FIXED (think about it) you can reduce redundant code by 
         // using a better data structure for player ships         
-        if (playerNumber == 1) // target player 1
-        {
-            while (i < this.Player1Ship.length  && !this.Player1Ship[i].isHitAt(position))
+
+            while (i < this.players[playerNumber].getShipsNumber()  && !this.players[playerNumber].getShips()[i].isHitAt(position))
             {
                 i=i+1;
             }
-            if (i < this.Player1Ship.length)
+            if (i < this.players[playerNumber].getShipsNumber())
             {
-                if (this.Player1Ship[i].isShipSunk() )
+                if (this.players[playerNumber].getShips()[i].isShipSunk() )
                 {
-                    this.updatePlayer2Score();
+                    this.players[playerNumber].getScore();
                     return 2;  // Touched and sank
                 }
                 // TODO (fix) declare hard-coded values as constants
@@ -161,27 +113,7 @@ public class Battle
             {
                 return 0;  // Missed
             }
-        }
-        else    // target player 2
-        {
-            while (i < this.Player2Ship.length && !this.Player2Ship[i].isHitAt(position))
-            {
-                i=i+1;
-            }
-            if (i < this.Player2Ship.length)
-            {
-                if (this.Player2Ship[i].isShipSunk() )
-                {
-                    this.updatePlayer1Score() ;
-                    return 2;  // Touched and sank
-                }
-                return 1; // Touched
-            }
-            else
-            {
-                return 0;  // Missed
-            }
-        }
+      
     }
     
     
@@ -243,23 +175,13 @@ public class Battle
      */
     private boolean isGameWon(int nbPlayer)
     {
-        if (nbPlayer == 1)
-        {
-            // TODO (fix) simplify
-            if (Battle.DEFAULT_NUMBER_OF_SHIPS - this.player1Score == 0)
+        // TODO (fix) simplify
+        if (Battle.DEFAULT_NUMBER_OF_SHIPS - this.players[nbPlayer].getScore() == 0)
             {
                 return true;
             }
-            return false;
-        }
-        else
-        {
-            // TODO (fix) simplify
-            if (Battle.DEFAULT_NUMBER_OF_SHIPS - this.player2Score == 0)
-            {
-                return true;
-            }
-            return false;
-        }
+        return false;
+        
     }
 }
+
