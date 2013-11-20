@@ -9,7 +9,7 @@ package fr.iutvalence.java.mp.Battleship;
 public class Ship 
 {
     /**
-     * Ship array : contain area ship (in order or in disorder)
+     * Positions : contain area ship (in order or in disorder)
      */
     private ShipArea[] positions;
 
@@ -23,13 +23,22 @@ public class Ship
     }
 
     /**
+     * Getter for positions (a ship)
+     * @return positions
+     */
+    public ShipArea[] getPositions()
+    {
+        return this.positions;
+    }
+
+    /**
      * Research if targeted area is contained in the ship and if yes, touched it
      * 
      * @param c  coordinate of targeted area
      * @return true if ship is hit, else false (coordinate not found in the ship)
      */
     // TODO (fix) use exception to handle bad coordinates
-    public boolean isHitAt(Coordinates c)
+    public boolean isHitAt(Coordinates c) 
     {
         // TODO FIXED rewrite the loop as a for
         
@@ -44,8 +53,8 @@ public class Ship
             return true;
         }
         // TODO (fix) simplify
-        else
-        {
+        else 
+        {                     
             return false;
         }
     }

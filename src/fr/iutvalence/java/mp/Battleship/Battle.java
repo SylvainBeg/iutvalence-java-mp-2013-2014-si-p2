@@ -42,8 +42,6 @@ public class Battle
         this.players[1] = new PlayerInfo(shipsP1);
         this.players[2] = new PlayerInfo(shipsP2);
         
-        
-
     }
 
   
@@ -165,6 +163,26 @@ public class Battle
                 position = new Coordinates(x, y);
             }
             return ship;
+        }
+    }
+    
+    
+    
+    
+    
+
+    private boolean freeLocation(Ship shipAtPlace, int playerNumber)
+    {
+        int i;
+        for (i=0; i<shipAtPlace.getPositions().length; i++)
+        {
+            for (int j=0; j < this.players[playerNumber].getShips().length; j++  )
+            {
+                for (int k=0; k < this.players[playerNumber].getShips()[j].getPositions().length; k++)
+                {
+                    if (   ...    )
+                }
+            }
         }
     }
     
