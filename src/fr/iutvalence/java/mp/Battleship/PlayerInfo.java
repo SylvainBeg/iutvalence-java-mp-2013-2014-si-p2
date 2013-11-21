@@ -35,7 +35,7 @@ public class PlayerInfo
      * Getter for ships number
      * @return ships number
      */
-    public int getShipsNumber()
+    public int getNumberOfShips()
     {
         return this.ships.length;
     }

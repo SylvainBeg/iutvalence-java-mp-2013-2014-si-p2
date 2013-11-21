@@ -9,25 +9,25 @@ package fr.iutvalence.java.mp.Battleship;
 public class Coordinates
 {
     /**
-     * Columns number
+     * Column number
      */
     private final int column;
 
     /**
-     * Lines number
+     * Row number
      */
-    private final int line;
+    private final int row;
 
     /**
-     * Represents an unique position in the grid with a column number and a line number (given a parameter).
+     * Represents an unique position in the grid with a column number and a row number (given a parameter).
      * 
      * @param column0 : column number
-     * @param line0 : line number
+     * @param row0 : row number
      */
-    public Coordinates(int column0, int line0)
+    public Coordinates(int column0, int row0)
     {
         this.column = column0;
-        this.line = line0;
+        this.row = row0;
     }
 
     /**
@@ -41,12 +41,12 @@ public class Coordinates
     }
 
     /**
-     * return line number
+     * return row number
      * 
-     * @return line number
+     * @return row number
      */
     public int getLine()
     {
-        return this.line;
+        return this.row;
     }
 }
