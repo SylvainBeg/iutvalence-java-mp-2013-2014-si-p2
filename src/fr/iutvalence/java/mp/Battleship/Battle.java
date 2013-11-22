@@ -77,10 +77,10 @@ public class Battle
      *            position of targeted area
      * @param playerNumber
      *            : number of player which is targeted
-     * @return result of hit : 0 : Missed position not found in ships 1 :
-     *         Touched : position found (and so ship hit and update) 2 : touched
-     *         and sunk : position found (and so ship hit and update) and all
-     *         areas are touched
+     * @return result of hit : 0 : Missed position not found in ships 
+     *      1 : Touched : position found (and so ship hit and update) 
+     *      2 : touched and sunk : position found (and so ship hit and update) 
+     *        and all areas are touched
      */
 
     // Revoir avec les exceptions
@@ -89,30 +89,22 @@ public class Battle
     {
         int i = 0;
 
-        // TODO (fix) rewrite this loop using a "for all ships" loop
+        // TODO FIXED rewrite this loop using a "for all ships" loop
         // with a breaking condition
-        while (i < this.players[playerNumber].getShipsNumber()
-                && !this.players[playerNumber].getShips()[i].isHitAt(position))
-        {
-            i = i + 1;
-        }
         
-        if (i < this.players[playerNumber].getShipsNumber())
+        for (i = 0; i < this.players[playerNumber].getNumberOfShips(); i++)
         {
-            if (this.players[playerNumber].getShips()[i].isShipSunk())
+            if (this.players[playerNumber].getShips()[i].isHitAt(position))
             {
-                this.players[playerNumber].getScore();
-                
-                return 2; // Touched and sank
+                if (this.players[playerNumber].getShips()[i].isShipSunk())
+                {
+                    this.players[playerNumber].incrementScore(1);
+                    return 2;
+                }
+                return 1;
             }
-            // TODO (fix) declare hard-coded values as constants
-            return 1; // Touched
         }
-        else
-        {
-            return 0; // Missed
-        }
-
+        return 0;   
     }
 
     /**
@@ -120,24 +112,69 @@ public class Battle
      * 
      * @param shipSize
      *            :area number of ship to create
+     * @param playerNumber : number of player  which ship is location
      * @return ship : a ship area array (ready to be place in the grid )
      */
-    private ShipArea[] locationShip(int shipSize)
+    private Ship locationShip(int shipSize, int playerNumber)
     {
         Random r = new Random();
         int direction = r.nextInt(1); // 0 : horizontal and 1 : vertical
         
-        // TODO (fix) declare variables where they are used
-        int x;
-        int y;
-        
-        int cursor = 0;
-        Coordinates position;
+        // TODO FIXED declare variables where they are used
+
         ShipArea[] ship = new ShipArea[shipSize];
 
-        // TODO (fix) declare hard-coded values as constants
+        // TODO FIXED declare hard-coded values as constants
+           
+        int attempt = 0;
+        do {
+            int cursor = 0;
+            Coordinates position;
+            
+            int x;
+            int y;
+            int vertical = 1;
+            
+            x = 1 + r.nextInt(DEFAULT_GRID_SIZE - shipSize);
+            y = 1 + r.nextInt(DEFAULT_GRID_SIZE - 1);
+            if (direction == vertical)
+            {
+                int t;
+                t=x;
+                x=y;
+                y=t;
+            }
+             
+            position = new Coordinates(x, y);
+            while (cursor < shipSize)
+            {
+                ship[cursor] = new ShipArea(position);
+                cursor = cursor + 1;
+                if (direction == vertical)
+                {
+                    x = x + 1;
+                }
+                else 
+                {
+                   y = y + 1;
+                }
+                position = new Coordinates(x, y);
+            }
+            attempt++;
+            Ship constructingShip = new Ship(ship);
+        } while (attempt < 15 && !freeLocation(constructingShip, playerNumber));
+        
+        // prendre en comtpe le cas d'erreur ! 
+        
+        return constructingShip;
+    }
+        
+    /*     //////////////////
         if (direction == 0)
         {
+            int x;
+            int y;
+            
             x = 1 + r.nextInt(DEFAULT_GRID_SIZE - shipSize);
             y = 1 + r.nextInt(DEFAULT_GRID_SIZE - 1);
             position = new Coordinates(x, y);
@@ -153,6 +190,9 @@ public class Battle
         // TODO (fix) simplify
         else
         {
+            int x;
+            int y;
+            
             x = 1 + r.nextInt(DEFAULT_GRID_SIZE - 1);
             y = 1 + r.nextInt(DEFAULT_GRID_SIZE - shipSize);
             position = new Coordinates(x, y);
@@ -164,10 +204,16 @@ public class Battle
                 position = new Coordinates(x, y);
             }
             return ship;
-        }
-    }
+        }*/
+    
 
     // TODO (fix) write comment
+    /**
+     * Check if all positions of a ship at place are free or not.
+     * @param shipAtPlace ; it's a ship at place
+     * @param playerNumber : number of player which want to place a ship
+     * @return it can be placed or not (all positions are free)
+     */
     private boolean freeLocation(Ship shipAtPlace, int playerNumber)
     {
         int i;
@@ -177,12 +223,18 @@ public class Battle
             {
                 for (int k=0; k < this.players[playerNumber].getShips()[j].getPositions().length; k++)
                 {
-                    if (   ...    )
+                    if (shipAtPlace.getPositions()[i].getPosition() ==  
+                                 this.players[playerNumber].getShips()[j].getPositions()[k].getPosition())
+                    {
+                        return false;
+                    }
                 }
             }
         }
+        return true;
     }
 
+    
     /**
      * research if a game is won by a player : if player 1 is targeted then we
      * analyze player 2 score (and inversely)
@@ -194,8 +246,8 @@ public class Battle
      */
     private boolean isGameWon(int nbPlayer)
     {
-        // TODO (fix) simplify
-        if (Battle.DEFAULT_NUMBER_OF_SHIPS - this.players[nbPlayer].getScore() == 0)
+        // TODO FIXED simplify
+        if (Battle.DEFAULT_NUMBER_OF_SHIPS  == this.players[nbPlayer].getScore())
         {
             return true;
         }

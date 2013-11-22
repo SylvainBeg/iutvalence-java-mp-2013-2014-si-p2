@@ -40,23 +40,18 @@ public class Ship
     // TODO (fix) use exception to handle bad coordinates
     public boolean isHitAt(Coordinates c) 
     {
-        // TODO (fix) move breaking condition inside loop to avoid having both a complex condition
+        // TODO FIXED move breaking condition inside loop to avoid having both a complex condition
         // and an empty loop
         int i;
-        for (i=0; i < this.positions.length && this.positions[i].getPosition() != c; i++ )
+        for (i=0; i < this.positions.length; i++ )
         {
+            if (this.positions[i].getPosition() == c)
+            {
+                this.positions[i].setHit(true);
+                return true;
+            }
         }
-
-        if (i < this.positions.length)
-        {
-            this.positions[i].setHit(true);
-            return true;
-        }
-        // TODO (fix) simplify
-        else 
-        {                     
-            return false;
-        }
+        return false;
     }
 
     
@@ -66,22 +61,17 @@ public class Ship
      */
     public boolean isShipSunk()
     {  
-        // TODO (fix) move breaking condition inside loop to avoid having both a complex condition
+        // TODO FIXED move breaking condition inside loop to avoid having both a complex condition
         // and an empty loop
         int i;
-        for (i=0; i < this.positions.length && this.positions[i].isHit(); i++ )
+        for (i=0; i < this.positions.length; i++ )
         {
+            if (!this.positions[i].isHit())
+            {
+                return false;
+            }
         }
-        
-        // TODO (fix) simplify
-        if (i < this.positions.length)
-        {
-            return false;
-        }
-        else
-        {
-            return true;
-        }
+        return true;
     }
 
 }
