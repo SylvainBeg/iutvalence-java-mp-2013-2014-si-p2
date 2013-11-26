@@ -28,9 +28,7 @@ public class PlayerInfo
         this.score = 0;
         this.ships = ships;
     }
-
-
-    
+ 
     /**
      * Getter for ships number
      * @return ships number
@@ -39,7 +37,6 @@ public class PlayerInfo
     {
         return this.ships.length;
     }
-    
     
     /**
      * Getter for player score

@@ -40,10 +40,7 @@ public class Ship
     // TODO (fix) use exception to handle bad coordinates
     public boolean isHitAt(Coordinates c) 
     {
-        // TODO FIXED move breaking condition inside loop to avoid having both a complex condition
-        // and an empty loop
-        int i;
-        for (i=0; i < this.positions.length; i++ )
+        for (int i=0; i < this.positions.length; i++ )
         {
             if (this.positions[i].getPosition() == c)
             {
@@ -60,11 +57,8 @@ public class Ship
      * @return ship condition (sank or not)
      */
     public boolean isShipSunk()
-    {  
-        // TODO FIXED move breaking condition inside loop to avoid having both a complex condition
-        // and an empty loop
-        int i;
-        for (i=0; i < this.positions.length; i++ )
+    {         
+        for (int i=0; i < this.positions.length; i++ )
         {
             if (!this.positions[i].isHit())
             {

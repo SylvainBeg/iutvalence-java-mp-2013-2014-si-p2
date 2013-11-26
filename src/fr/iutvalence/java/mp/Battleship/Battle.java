@@ -87,18 +87,15 @@ public class Battle
 
     private int isShipHit(Coordinates position, int playerNumber)
     {
-        int i = 0;
-
-        // TODO FIXED rewrite this loop using a "for all ships" loop
-        // with a breaking condition
-        
-        for (i = 0; i < this.players[playerNumber].getNumberOfShips(); i++)
+        for (int i = 0; i < this.players[playerNumber].getNumberOfShips(); i++)
         {
             if (this.players[playerNumber].getShips()[i].isHitAt(position))
             {
                 if (this.players[playerNumber].getShips()[i].isShipSunk())
                 {
                     this.players[playerNumber].incrementScore(1);
+                    
+                    // TODO (fix) declare hard-coded values as constant
                     return 2;
                 }
                 return 1;
@@ -118,25 +115,21 @@ public class Battle
     private Ship locationShip(int shipSize, int playerNumber)
     {
         Random r = new Random();
+        
+        // TODO (fix) declare hard-coded values as constant
         int direction = r.nextInt(1); // 0 : horizontal and 1 : vertical
         
-        // TODO FIXED declare variables where they are used
-
         ShipArea[] ship = new ShipArea[shipSize];
-
-        // TODO FIXED declare hard-coded values as constants
-           
+        
         int attempt = 0;
         do {
             int cursor = 0;
             Coordinates position;
             
-            int x;
-            int y;
             int vertical = 1;
             
-            x = 1 + r.nextInt(DEFAULT_GRID_SIZE - shipSize);
-            y = 1 + r.nextInt(DEFAULT_GRID_SIZE - 1);
+            int x = 1 + r.nextInt(DEFAULT_GRID_SIZE - shipSize);
+            int y = 1 + r.nextInt(DEFAULT_GRID_SIZE - 1);
             if (direction == vertical)
             {
                 int t;
@@ -246,7 +239,7 @@ public class Battle
      */
     private boolean isGameWon(int nbPlayer)
     {
-        // TODO FIXED simplify
+        // TODO (fix) simplify
         if (Battle.DEFAULT_NUMBER_OF_SHIPS  == this.players[nbPlayer].getScore())
         {
             return true;
