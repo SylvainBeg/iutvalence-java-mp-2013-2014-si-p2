@@ -18,7 +18,7 @@ public class Battle
     /**
      * Default size of grid
      */
-    private final static int DEFAULT_GRID_SIZE = 10;
+    public final static int DEFAULT_GRID_SIZE = 10;
 
     /**
      * Number of turns
@@ -67,6 +67,7 @@ public class Battle
     {
 
     }
+    
 
     /**
      * 
@@ -81,27 +82,33 @@ public class Battle
      *      1 : Touched : position found (and so ship hit and update) 
      *      2 : touched and sunk : position found (and so ship hit and update) 
      *        and all areas are touched
+     * @throws BadCoordinatesException 
      */
 
     // Revoir avec les exceptions
 
-    private int isShipHit(Coordinates position, int playerNumber)
+    private int isShipHit(Coordinates position, int playerNumber) throws BadCoordinatesException 
     {
+        int missed = 0;
+        int touched = 1;
+        int touchedAndSunk = 2;
+        
         for (int i = 0; i < this.players[playerNumber].getNumberOfShips(); i++)
         {
+                    
             if (this.players[playerNumber].getShips()[i].isHitAt(position))
             {
                 if (this.players[playerNumber].getShips()[i].isShipSunk())
                 {
                     this.players[playerNumber].incrementScore(1);
                     
-                    // TODO (fix) declare hard-coded values as constant
-                    return 2;
+                    // TODO FIXED declare hard-coded values as constant
+                    return touchedAndSunk;
                 }
-                return 1;
+                return touched;
             }
         }
-        return 0;   
+        return missed;   
     }
 
     /**
@@ -112,24 +119,30 @@ public class Battle
      * @param playerNumber : number of player  which ship is location
      * @return ship : a ship area array (ready to be place in the grid )
      */
-    private Ship locationShip(int shipSize, int playerNumber)
+    private Ship locationShip(int shipSize, int playerNumber) throws TooMuchAttemptException
     {
         Random r = new Random();
+        int vertical = 1;
+        int maximaleAttempt = 15;
         
-        // TODO (fix) declare hard-coded values as constant
+        // TODO FIXED declare hard-coded values as constant
+        
         int direction = r.nextInt(1); // 0 : horizontal and 1 : vertical
         
         ShipArea[] ship = new ShipArea[shipSize];
+       
+        Ship constructingShip;
         
-        int attempt = 0;
-        do {
-            int cursor = 0;
-            Coordinates position;
+        for ( int attempt = 0; attempt < maximaleAttempt; attempt++)
+        {
             
-            int vertical = 1;
-            
+            Coordinates position = null;
+            // location of the first area
+                
             int x = 1 + r.nextInt(DEFAULT_GRID_SIZE - shipSize);
             int y = 1 + r.nextInt(DEFAULT_GRID_SIZE - 1);
+            if ( x < 0 && x > Battle.DEFAULT_GRID_SIZE && y < 0 && y > Battle.DEFAULT_GRID_SIZE)  continue;
+
             if (direction == vertical)
             {
                 int t;
@@ -137,8 +150,12 @@ public class Battle
                 x=y;
                 y=t;
             }
-             
+            
             position = new Coordinates(x, y);
+            ship[0] = new ShipArea(position);
+            
+            // construction of ship
+            int cursor = 1;
             while (cursor < shipSize)
             {
                 ship[cursor] = new ShipArea(position);
@@ -153,54 +170,22 @@ public class Battle
                 }
                 position = new Coordinates(x, y);
             }
-            attempt++;
-            Ship constructingShip = new Ship(ship);
-        } while (attempt < 15 && !freeLocation(constructingShip, playerNumber));
+                                              
+            constructingShip = new Ship(ship);      
+              
+           if (!freeLocation(constructingShip, playerNumber))
+           {
+               return constructingShip;
+           }
+       }   
+       
+        throw new TooMuchAttemptException();
         
-        // prendre en comtpe le cas d'erreur ! 
-        
-        return constructingShip;
+
     }
         
-    /*     //////////////////
-        if (direction == 0)
-        {
-            int x;
-            int y;
-            
-            x = 1 + r.nextInt(DEFAULT_GRID_SIZE - shipSize);
-            y = 1 + r.nextInt(DEFAULT_GRID_SIZE - 1);
-            position = new Coordinates(x, y);
-            while (cursor < shipSize)
-            {
-                ship[cursor] = new ShipArea(position);
-                cursor = cursor + 1;
-                x = x + 1;
-                position = new Coordinates(x, y);
-            }
-            return ship;
-        }
-        // TODO (fix) simplify
-        else
-        {
-            int x;
-            int y;
-            
-            x = 1 + r.nextInt(DEFAULT_GRID_SIZE - 1);
-            y = 1 + r.nextInt(DEFAULT_GRID_SIZE - shipSize);
-            position = new Coordinates(x, y);
-            while (cursor < shipSize)
-            {
-                ship[cursor] = new ShipArea(position);
-                cursor = cursor + 1;
-                y = y + 1;
-                position = new Coordinates(x, y);
-            }
-            return ship;
-        }*/
-    
 
-    // TODO (fix) write comment
+    // TODO FIXED write comment
     /**
      * Check if all positions of a ship at place are free or not.
      * @param shipAtPlace ; it's a ship at place

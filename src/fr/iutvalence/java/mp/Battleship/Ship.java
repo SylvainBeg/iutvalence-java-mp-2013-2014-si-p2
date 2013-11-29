@@ -38,8 +38,11 @@ public class Ship
      * @return true if ship is hit, else false (coordinate not found in the ship)
      */
     // TODO (fix) use exception to handle bad coordinates
-    public boolean isHitAt(Coordinates c) 
+    public boolean isHitAt(Coordinates c)  throws BadCoordinatesException
     {
+        if ( c.getColumn() < 0 && c.getColumn() > Battle.DEFAULT_GRID_SIZE && c.getLine() < 0 && c.getLine() > Battle.DEFAULT_GRID_SIZE)
+            throw new BadCoordinatesException();
+        
         for (int i=0; i < this.positions.length; i++ )
         {
             if (this.positions[i].getPosition() == c)

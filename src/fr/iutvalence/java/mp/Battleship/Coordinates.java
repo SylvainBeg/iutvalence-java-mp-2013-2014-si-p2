@@ -24,8 +24,9 @@ public class Coordinates
      * @param column0 : column number
      * @param row0 : row number
      */
-    public Coordinates(int column0, int row0)
+    public Coordinates(int column0, int row0) 
     {
+       
         this.column = column0;
         this.row = row0;
     }
