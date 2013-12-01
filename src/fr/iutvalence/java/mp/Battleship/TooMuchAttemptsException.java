@@ -1,9 +1,9 @@
 package fr.iutvalence.java.mp.Battleship;
 
-public class TooMuchAttemptException extends Exception
+public class TooMuchAttemptsException extends Exception
 {
 
-    public TooMuchAttemptException ()
+    public TooMuchAttemptsException ()
     {
         System.out.println("problème !");
         

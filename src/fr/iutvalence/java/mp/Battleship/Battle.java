@@ -20,6 +20,7 @@ public class Battle
      */
     public final static int DEFAULT_GRID_SIZE = 10;
 
+    // TODO (fix) this should not be declared as a field (it seems to be a local variable)
     /**
      * Number of turns
      */
@@ -45,6 +46,7 @@ public class Battle
         this.players[2] = new PlayerInfo(shipsP2);
     }
 
+    // TODO (fix) remove this (useless)
     /**
      * return turn number
      * 
@@ -55,6 +57,7 @@ public class Battle
         return this.numberOfTurns;
     }
 
+    // TODO (fix) remove this (useless)
     /**
      * Add a turn
      */
@@ -69,6 +72,7 @@ public class Battle
     }
     
 
+    // TODO (fix) finish writing comment (exception), and rewrite it (unclear)
     /**
      * 
      * Research in ships the targeted area. If it contains in a ship, we target
@@ -84,11 +88,10 @@ public class Battle
      *        and all areas are touched
      * @throws BadCoordinatesException 
      */
-
-    // Revoir avec les exceptions
-
+    // TODO (fix) rename this method (it is much more related to the processing of one shot)
     private int isShipHit(Coordinates position, int playerNumber) throws BadCoordinatesException 
     {
+        // TODO (fix) declare constants instead of using these local variables
         int missed = 0;
         int touched = 1;
         int touchedAndSunk = 2;
@@ -101,8 +104,7 @@ public class Battle
                 if (this.players[playerNumber].getShips()[i].isShipSunk())
                 {
                     this.players[playerNumber].incrementScore(1);
-                    
-                    // TODO FIXED declare hard-coded values as constant
+                                     
                     return touchedAndSunk;
                 }
                 return touched;
@@ -119,13 +121,14 @@ public class Battle
      * @param playerNumber : number of player  which ship is location
      * @return ship : a ship area array (ready to be place in the grid )
      */
-    private Ship locationShip(int shipSize, int playerNumber) throws TooMuchAttemptException
+    private Ship locationShip(int shipSize, int playerNumber) throws TooMuchAttemptsException
     {
         Random r = new Random();
-        int vertical = 1;
-        int maximaleAttempt = 15;
         
-        // TODO FIXED declare hard-coded values as constant
+        // TODO (fix) declare hard-coded values as constant (not as local variables)
+        int vertical = 1;
+        
+        int maximaleAttempt = 15;
         
         int direction = r.nextInt(1); // 0 : horizontal and 1 : vertical
         
@@ -179,13 +182,12 @@ public class Battle
            }
        }   
        
-        throw new TooMuchAttemptException();
+        throw new TooMuchAttemptsException();
         
 
     }
         
-
-    // TODO FIXED write comment
+    // TODO (fix) rename method (more explicit)
     /**
      * Check if all positions of a ship at place are free or not.
      * @param shipAtPlace ; it's a ship at place
