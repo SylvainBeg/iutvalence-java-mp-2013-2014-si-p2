@@ -12,12 +12,12 @@ public class PlayerInfo
      */
     private int score;
     
+    
     /**
      * player ships
      */
     private final Ship[] ships;
 
-    
     /**
      * Creates a new player info instance, with given ship (and a initial score of 0 points)
      * @param ships player ships

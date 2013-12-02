@@ -31,13 +31,13 @@ public class Ship
         return this.positions;
     }
 
-    // TODO (fix) finish writing comment (exception)
+    // TODO FIXED finish writing comment (exception)
     /**
      * Research if targeted area is contained in the ship and if yes, touched it
      * 
      * @param c  coordinate of targeted area
      * @return true if ship is hit, else false (coordinate not found in the ship)
-     * @throws BadCoordinatesException 
+     * @throws BadCoordinatesException : exception throws if coordinates are not in the grid
      */
     public boolean isHitAt(Coordinates c)  throws BadCoordinatesException
     {

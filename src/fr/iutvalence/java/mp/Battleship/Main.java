@@ -13,22 +13,26 @@ public class Main
      * 
      * @param args
      */
+    
+    PlayerLocationShip player1;
+    
     public static void main(String[] args)
     {
-        /*
-         * Coordinates c1 = new Coordinates(5,2); ShipArea area1 = new
-         * ShipArea(c1);
-         * 
-         * Coordinates c2 = new Coordinates(5,3); ShipArea area2 = new
-         * ShipArea(c1);
-         * 
-         * Coordinates c3 = new Coordinates(5,4); ShipArea area3 = new
-         * ShipArea(c2);
-         * 
-         * ShipArea shipArea1[] = {area1, area2, area3};
-         * 
-         * Ship ship1 = new Ship(shipArea1);
-         */
+          
+        PlayerLocationShip player1 = new PlayerLocationShip();
+        
+// Adapter le code  ....
+        
+        try{
+            this.ships[0] = this.addShip(2);
+            this.ships[1] = this.addShip(3);
+            this.ships[2] = this.addShip(3);
+            this.ships[3] = this.addShip(4);
+            this.ships[4] = this.addShip(5);
+        }
+        catch (TooMuchAttemptsException e) {
+            System.out.println("Erreur, impossible de placer l'ensemble des bateaux.");
+        }
 
     }
 }

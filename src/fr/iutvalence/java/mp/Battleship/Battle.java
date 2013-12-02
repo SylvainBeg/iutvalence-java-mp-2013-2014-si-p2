@@ -13,23 +13,44 @@ public class Battle
     /**
      * Default number of ships
      */
-    private final static int DEFAULT_NUMBER_OF_SHIPS = 5;
+    public final static int DEFAULT_NUMBER_OF_SHIPS = 5;
 
     /**
      * Default size of grid
      */
     public final static int DEFAULT_GRID_SIZE = 10;
 
-    // TODO (fix) this should not be declared as a field (it seems to be a local variable)
     /**
-     * Number of turns
+     * result of shot : if any ship is not hit
      */
-    private int numberOfTurns;
-
+    private final static int MISSED = 0;
+    
+    /**
+     * result of shot : if a ship is hit (but not sunk)
+     */
+    private final static int TOUCHED = 1;
+    
+    /**
+     * result of shot : if a ship is touched and sunk
+     */
+    private final static int TOUCHED_AND_SUNK = 2;
+    
+    /**
+     * indicate that ship position is vertical
+     */
+    public final static int POSITION_VERTICAl = 1;
+    
+    /**
+     * number of maximal attempt to test the location of ship
+     */
+    public final static int MAXIMAL_ATTEMPT = 15;
+    
+    
     /**
      * Informations about players
      */
     private PlayerInfo[] players;
+    
 
     /**
      * Initialize a game (initialize scores and turn number)
@@ -41,60 +62,34 @@ public class Battle
      */
     public Battle(Ship[] shipsP1, Ship[] shipsP2)
     {
-        this.numberOfTurns = 0;
+
         this.players[1] = new PlayerInfo(shipsP1);
         this.players[2] = new PlayerInfo(shipsP2);
     }
 
-    // TODO (fix) remove this (useless)
-    /**
-     * return turn number
-     * 
-     * @return turn number
-     */
-    private int getNumberOfTurns()
-    {
-        return this.numberOfTurns;
-    }
-
-    // TODO (fix) remove this (useless)
-    /**
-     * Add a turn
-     */
-    private void updateTurn()
-    {
-        this.numberOfTurns = this.numberOfTurns + 1;
-    }
-
-    public void play()
-    {
-
-    }
     
 
-    // TODO (fix) finish writing comment (exception), and rewrite it (unclear)
+    // TODO FIXED finish writing comment (exception), and rewrite it (unclear)
     /**
-     * 
-     * Research in ships the targeted area. If it contains in a ship, we target
-     * the ship with Ship.isHitArea and update ship
+     * A shot is launched by a player. Return result of shot.
+     * For that, we research in ships the targeted area. If at this position there is a ship, then we hit
+     * the ship with Ship.isHitArea().
      * 
      * @param position
      *            position of targeted area
      * @param playerNumber
      *            : number of player which is targeted
-     * @return result of hit : 0 : Missed position not found in ships 
-     *      1 : Touched : position found (and so ship hit and update) 
-     *      2 : touched and sunk : position found (and so ship hit and update) 
+     * @return result of hit : MISSED : position not found in ships 
+     *      1 : TOUCHED : position found (and so ship hit and update) 
+     *      2 : TOUCHED_AND_SUNK : position found (and so ship hit and update) 
      *        and all areas are touched
-     * @throws BadCoordinatesException 
+     * @throws BadCoordinatesException : exception throws if isHitAt() throws an exception (coordinates are not in the grid)
      */
-    // TODO (fix) rename this method (it is much more related to the processing of one shot)
-    private int isShipHit(Coordinates position, int playerNumber) throws BadCoordinatesException 
+    // TODO FIXED rename this method (it is much more related to the processing of one shot)
+    private int shot(Coordinates position, int playerNumber) throws BadCoordinatesException 
     {
-        // TODO (fix) declare constants instead of using these local variables
-        int missed = 0;
-        int touched = 1;
-        int touchedAndSunk = 2;
+        // TODO FIXED declare constants instead of using these local variables
+        
         
         for (int i = 0; i < this.players[playerNumber].getNumberOfShips(); i++)
         {
@@ -105,12 +100,12 @@ public class Battle
                 {
                     this.players[playerNumber].incrementScore(1);
                                      
-                    return touchedAndSunk;
+                    return TOUCHED_AND_SUNK;
                 }
-                return touched;
+                return TOUCHED;
             }
         }
-        return missed;   
+        return MISSED;   
     }
 
     /**
@@ -125,10 +120,8 @@ public class Battle
     {
         Random r = new Random();
         
-        // TODO (fix) declare hard-coded values as constant (not as local variables)
-        int vertical = 1;
+        // TODO FIXED declare hard-coded values as constant (not as local variables)
         
-        int maximaleAttempt = 15;
         
         int direction = r.nextInt(1); // 0 : horizontal and 1 : vertical
         
@@ -136,7 +129,7 @@ public class Battle
        
         Ship constructingShip;
         
-        for ( int attempt = 0; attempt < maximaleAttempt; attempt++)
+        for ( int attempt = 0; attempt < MAXIMAL_ATTEMPT; attempt++)
         {
             
             Coordinates position = null;
@@ -146,7 +139,7 @@ public class Battle
             int y = 1 + r.nextInt(DEFAULT_GRID_SIZE - 1);
             if ( x < 0 && x > Battle.DEFAULT_GRID_SIZE && y < 0 && y > Battle.DEFAULT_GRID_SIZE)  continue;
 
-            if (direction == vertical)
+            if (direction == POSITION_VERTICAl)
             {
                 int t;
                 t=x;
@@ -163,7 +156,7 @@ public class Battle
             {
                 ship[cursor] = new ShipArea(position);
                 cursor = cursor + 1;
-                if (direction == vertical)
+                if (direction == POSITION_VERTICAl)
                 {
                     x = x + 1;
                 }
@@ -176,7 +169,7 @@ public class Battle
                                               
             constructingShip = new Ship(ship);      
               
-           if (!freeLocation(constructingShip, playerNumber))
+           if (!shipCanBePlace(constructingShip, playerNumber))
            {
                return constructingShip;
            }
@@ -187,14 +180,14 @@ public class Battle
 
     }
         
-    // TODO (fix) rename method (more explicit)
+    // TODO FIXED rename method (more explicit)
     /**
      * Check if all positions of a ship at place are free or not.
      * @param shipAtPlace ; it's a ship at place
      * @param playerNumber : number of player which want to place a ship
      * @return it can be placed or not (all positions are free)
      */
-    private boolean freeLocation(Ship shipAtPlace, int playerNumber)
+    private boolean shipCanBePlace(Ship shipAtPlace, int playerNumber)
     {
         int i;
         for (i=0; i<shipAtPlace.getPositions().length; i++)
@@ -234,4 +227,29 @@ public class Battle
         return false;
 
     }
+    
+    
+    
+    
+
+    public void play()
+    {
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    }
+    
+
+    
+    
+    
+    
 }
