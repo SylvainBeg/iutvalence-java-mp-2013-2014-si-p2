@@ -43,7 +43,7 @@ public class PlayerLocationShip
      * @return ship : a ship area array (ready to be place in the grid )
      * @throws TooMuchAttemptsException : exception throws if we have try too much attempts to place a ship
      */
-    private Ship addShip(int shipSize) throws TooMuchAttemptsException
+    public Ship addShip(int shipSize) throws TooMuchAttemptsException
     {
         Random r = new Random();
         

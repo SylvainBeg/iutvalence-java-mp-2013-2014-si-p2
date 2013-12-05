@@ -13,22 +13,30 @@ public class Main
      * 
      * @param args
      */
-    
-    PlayerLocationShip player1;
-    
+
     public static void main(String[] args)
     {
           
         PlayerLocationShip player1 = new PlayerLocationShip();
+        PlayerLocationShip player2 = new PlayerLocationShip();
         
-// Adapter le code  ....
-        
+
         try{
-            this.ships[0] = this.addShip(2);
-            this.ships[1] = this.addShip(3);
-            this.ships[2] = this.addShip(3);
-            this.ships[3] = this.addShip(4);
-            this.ships[4] = this.addShip(5);
+            player1.getShips()[0] = player1.addShip(2);
+            player1.getShips()[1] = player1.addShip(3);
+            player1.getShips()[2] = player1.addShip(3);
+            player1.getShips()[3] = player1.addShip(4);
+            player1.getShips()[4] = player1.addShip(5);
+            
+            player2.getShips()[0] = player2.addShip(2);
+            player2.getShips()[1] = player2.addShip(3);
+            player2.getShips()[2] = player2.addShip(3);
+            player2.getShips()[3] = player2.addShip(4);
+            player2.getShips()[4] = player2.addShip(5);
+            
+            Battle game = new Battle(player1.getShips(), player2.getShips());  
+            game.play();
+            
         }
         catch (TooMuchAttemptsException e) {
             System.out.println("Erreur, impossible de placer l'ensemble des bateaux.");

@@ -1,6 +1,7 @@
 package fr.iutvalence.java.mp.Battleship;
 
 import java.util.Random;
+import java.util.Scanner;
 
 /**
  * This class represents a new naval battle game.
@@ -80,8 +81,8 @@ public class Battle
      * @param playerNumber
      *            : number of player which is targeted
      * @return result of hit : MISSED : position not found in ships 
-     *      1 : TOUCHED : position found (and so ship hit and update) 
-     *      2 : TOUCHED_AND_SUNK : position found (and so ship hit and update) 
+     *       TOUCHED : position found (and so ship hit and update) 
+     *       TOUCHED_AND_SUNK : position found (and so ship hit and update) 
      *        and all areas are touched
      * @throws BadCoordinatesException : exception throws if isHitAt() throws an exception (coordinates are not in the grid)
      */
@@ -108,104 +109,8 @@ public class Battle
         return MISSED;   
     }
 
-    /**
-     * place a ship in the grid
-     * 
-     * @param shipSize
-     *            :area number of ship to create
-     * @param playerNumber : number of player  which ship is location
-     * @return ship : a ship area array (ready to be place in the grid )
-     */
-    private Ship locationShip(int shipSize, int playerNumber) throws TooMuchAttemptsException
-    {
-        Random r = new Random();
-        
-        // TODO FIXED declare hard-coded values as constant (not as local variables)
-        
-        
-        int direction = r.nextInt(1); // 0 : horizontal and 1 : vertical
-        
-        ShipArea[] ship = new ShipArea[shipSize];
-       
-        Ship constructingShip;
-        
-        for ( int attempt = 0; attempt < MAXIMAL_ATTEMPT; attempt++)
-        {
-            
-            Coordinates position = null;
-            // location of the first area
-                
-            int x = 1 + r.nextInt(DEFAULT_GRID_SIZE - shipSize);
-            int y = 1 + r.nextInt(DEFAULT_GRID_SIZE - 1);
-            if ( x < 0 && x > Battle.DEFAULT_GRID_SIZE && y < 0 && y > Battle.DEFAULT_GRID_SIZE)  continue;
-
-            if (direction == POSITION_VERTICAl)
-            {
-                int t;
-                t=x;
-                x=y;
-                y=t;
-            }
-            
-            position = new Coordinates(x, y);
-            ship[0] = new ShipArea(position);
-            
-            // construction of ship
-            int cursor = 1;
-            while (cursor < shipSize)
-            {
-                ship[cursor] = new ShipArea(position);
-                cursor = cursor + 1;
-                if (direction == POSITION_VERTICAl)
-                {
-                    x = x + 1;
-                }
-                else 
-                {
-                   y = y + 1;
-                }
-                position = new Coordinates(x, y);
-            }
-                                              
-            constructingShip = new Ship(ship);      
-              
-           if (!shipCanBePlace(constructingShip, playerNumber))
-           {
-               return constructingShip;
-           }
-       }   
-       
-        throw new TooMuchAttemptsException();
-        
-
-    }
-        
-    // TODO FIXED rename method (more explicit)
-    /**
-     * Check if all positions of a ship at place are free or not.
-     * @param shipAtPlace ; it's a ship at place
-     * @param playerNumber : number of player which want to place a ship
-     * @return it can be placed or not (all positions are free)
-     */
-    private boolean shipCanBePlace(Ship shipAtPlace, int playerNumber)
-    {
-        int i;
-        for (i=0; i<shipAtPlace.getPositions().length; i++)
-        {
-            for (int j=0; j < this.players[playerNumber].getShips().length; j++  )
-            {
-                for (int k=0; k < this.players[playerNumber].getShips()[j].getPositions().length; k++)
-                {
-                    if (shipAtPlace.getPositions()[i].getPosition() ==  
-                                 this.players[playerNumber].getShips()[j].getPositions()[k].getPosition())
-                    {
-                        return false;
-                    }
-                }
-            }
-        }
-        return true;
-    }
+   
+ 
 
     
     /**
@@ -234,12 +139,39 @@ public class Battle
 
     public void play()
     {
-
+        Scanner sc = new Scanner(System.in);
         
+        int numberRealPlayer = 1;
         
+        int numberCurrentPlayer = 1; // It's the player1 who start
+        int numberAdversePlayer = 2;
         
-        
-        
+        if (numberCurrentPlayer == numberRealPlayer)
+        {
+            while (true) {
+                
+                int x, y;
+                
+                do {
+                    System.out.println("Veuillez saisir l'abscisse de la case à viser :");
+                    x = sc.nextInt();
+                    System.out.println("Veuillez saisir la coordonnée de la case à viser :");
+                    y = sc.nextInt();
+                    
+                } while (!(x < 0 && x > Battle.DEFAULT_GRID_SIZE && y < 0 && y > Battle.DEFAULT_GRID_SIZE));
+                
+                Coordinates target = new Coordinates(x,y);
+                try {
+                    int resultOfShot = this.shot(target, numberAdversePlayer);
+                }
+          
+                catch (BadCoordinatesException e) {   
+                }
+        }
+        else  // computer which play
+        {
+            
+        }
         
         
         
