@@ -16,7 +16,8 @@ public class Main
 
     public static void main(String[] args)
     {
-          
+        int winner;  
+        
         PlayerLocationShip player1 = new PlayerLocationShip();
         PlayerLocationShip player2 = new PlayerLocationShip();
         
@@ -35,7 +36,16 @@ public class Main
             player2.getShips()[4] = player2.addShip(5);
             
             Battle game = new Battle(player1.getShips(), player2.getShips());  
-            game.play();
+            winner = game.play();
+            
+            if (winner == 1)
+            {
+                System.out.println("Tu as gagné !!.");
+            }
+            else
+            {
+                System.out.println("Dommage, tu as perdu ...");
+            }
             
         }
         catch (TooMuchAttemptsException e) {
