@@ -16,40 +16,41 @@ public class Main
 
     public static void main(String[] args)
     {
-        int winner;  
-        
-        PlayerLocationShip player1 = new PlayerLocationShip();
-        PlayerLocationShip player2 = new PlayerLocationShip();
-        
+        int winner;
 
-        try{
-            player1.getShips()[0] = player1.addShip(2);
-            player1.getShips()[1] = player1.addShip(3);
-            player1.getShips()[2] = player1.addShip(3);
-            player1.getShips()[3] = player1.addShip(4);
-            player1.getShips()[4] = player1.addShip(5);
-            
-            player2.getShips()[0] = player2.addShip(2);
-            player2.getShips()[1] = player2.addShip(3);
-            player2.getShips()[2] = player2.addShip(3);
-            player2.getShips()[3] = player2.addShip(4);
-            player2.getShips()[4] = player2.addShip(5);
-            
-            Battle game = new Battle(player1.getShips(), player2.getShips());  
-            winner = game.play();
-            
-            if (winner == 1)
-            {
-                System.out.println("Tu as gagné !!.");
-            }
-            else
-            {
-                System.out.println("Dommage, tu as perdu ...");
-            }
-            
+        PlayerShipsConfigurator player1ShipsConfigurator = new PlayerShipsConfigurator();
+        PlayerShipsConfigurator player2ShipsConfigurator = new PlayerShipsConfigurator();
+
+        try
+        {
+            player1ShipsConfigurator.addShip(2);
+            player1ShipsConfigurator.addShip(3);
+            player1ShipsConfigurator.addShip(3);
+            player1ShipsConfigurator.addShip(4);
+            player1ShipsConfigurator.addShip(5);
+
+            player2ShipsConfigurator.addShip(2);
+            player2ShipsConfigurator.addShip(3);
+            player2ShipsConfigurator.addShip(3);
+            player2ShipsConfigurator.addShip(4);
+            player2ShipsConfigurator.addShip(5);
         }
-        catch (TooMuchAttemptsException e) {
-            System.out.println("Erreur, impossible de placer l'ensemble des bateaux.");
+        catch (TooMuchAttemptsException e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        Battle game = new Battle(player1ShipsConfigurator.getShips(), player2ShipsConfigurator.getShips());
+        winner = game.play();
+
+        if (winner == 1)
+        {
+            System.out.println("Tu as gagné !!.");
+        }
+        else
+        {
+            System.out.println("Dommage, tu as perdu ...");
         }
 
     }

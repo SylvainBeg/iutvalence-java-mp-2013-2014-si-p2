@@ -71,5 +71,24 @@ public class Ship
         }
         return true;
     }
+    
+    
+    public boolean overlapsShip(Ship otherShip)
+    {
+      
+        for (int thisShipPositionIndex = 0; thisShipPositionIndex < this.getPositions().length; thisShipPositionIndex++)
+        {
+            Coordinates thisPosition = this.getPositions()[thisShipPositionIndex].getPosition();
+            
+            for (int otherShipPositionIndex = 0; otherShipPositionIndex < this.getPositions().length; otherShipPositionIndex++)
+            {
+                
+                Coordinates otherPosition = otherShip.getPositions()[thisShipPositionIndex].getPosition();
+                        
+                if ((thisPosition.getColumn() == otherPosition.getColumn()) && (thisPosition.getLine() == otherPosition.getLine())) return true;
+            }
+        }
+        return false;
+    }
 
 }

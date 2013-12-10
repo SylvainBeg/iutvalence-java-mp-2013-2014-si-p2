@@ -63,9 +63,9 @@ public class Battle
      */
     public Battle(Ship[] shipsP1, Ship[] shipsP2)
     {
-
+        this.players = new PlayerInfo[3];
         this.players[1] = new PlayerInfo(shipsP1);
-        this.players[2] = new PlayerInfo(shipsP2);
+        this.players[1] = new PlayerInfo(shipsP2);
     }
 
 
@@ -159,9 +159,8 @@ public class Battle
                     System.out.println("Veuillez saisir la coordonnée de la case à viser :");
                     y = sc.nextInt();
 
-                } while (!(x < 0 && x > Battle.DEFAULT_GRID_SIZE && y < 0 && y > Battle.DEFAULT_GRID_SIZE));
-
-
+                } while (!(x > 0 && x < Battle.DEFAULT_GRID_SIZE && y > 0 && y < Battle.DEFAULT_GRID_SIZE));
+                System.out.println("Menglon");
                 Coordinates target = new Coordinates(x,y);
                 try {
                     int resultOfShot = this.shot(target, numberAdversePlayer);
@@ -210,7 +209,7 @@ public class Battle
                 }
 
             }
-
+            
             if (this.isGameWon(numberCurrentPlayer))
             {
                 return numberCurrentPlayer;
