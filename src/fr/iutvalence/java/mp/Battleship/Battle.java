@@ -136,7 +136,7 @@ public class Battle
 
 
     /**
-     * Lauch the game
+     * Launch the game
      * @return
      */
     public int play()
@@ -162,8 +162,6 @@ public class Battle
                     y = sc.nextInt();
 
                 } while (!(x > 0 && x < Battle.DEFAULT_GRID_SIZE && y > 0 && y < Battle.DEFAULT_GRID_SIZE));
-                System.out.println("Menglon");
-                System.out.println( this.players[1].getNumberOfShips());
                 Coordinates target = new Coordinates(x,y);
                 try {
                     int resultOfShot = this.shot(target, numberAdversePlayer);

@@ -63,13 +63,11 @@ public class PlayerShipsConfigurator
 
         int direction = r.nextInt(1); // 0 : horizontal and 1 : vertical
 
-        ShipArea[] shipAreas = new ShipArea[shipSize];
 
         for (int attempt = 0; attempt < Battle.MAXIMAL_ATTEMPT; attempt++)
         {
 
-            Coordinates position = null;
-            // location of the first area
+            
 
             int x = 1 + r.nextInt(Battle.DEFAULT_GRID_SIZE - shipSize);
             int y = 1 + r.nextInt(Battle.DEFAULT_GRID_SIZE - 1);
@@ -83,12 +81,14 @@ public class PlayerShipsConfigurator
                 x = y;
                 y = t;
             }
-
+            Coordinates position = null; // location of the first area
             position = new Coordinates(x, y);
+            
+            ShipArea[] shipAreas = new ShipArea[shipSize];
             shipAreas[0] = new ShipArea(position);
 
             // construction of ship
-            int cursor = 1;
+            int cursor = 0;
             while (cursor < shipSize)
             {
                 shipAreas[cursor] = new ShipArea(position);
@@ -111,11 +111,23 @@ public class PlayerShipsConfigurator
                    continue;
            
            this.ships[this.numberOfAlreadyPlacedShips] = shipToBePlaced;
-           System.out.println("bateau créé");
-         
-           System.out.println(  shipToBePlaced.getPositions()[1].getPosition().getColumn());
-           System.out.println(   this.numberOfAlreadyPlacedShips  );
            
+           
+           System.out.println("bateau créé"); ///////////// ! !!!!!
+         
+           //////////// a supprimé aussi après (en bas)
+           
+           System.out.println("Bateau de taille :" +shipSize);
+               for(int j=0; j<shipToBePlaced.getPositions().length ;j++) // parcours chaque case
+               {
+
+                   System.out.println(shipToBePlaced.getPositions()[j].getPosition().getColumn());
+                   System.out.println("|");
+                   System.out.println(shipToBePlaced.getPositions()[j].getPosition().getLine());
+               
+               }
+           
+           /////////////// jusque là !!!
            
            this.numberOfAlreadyPlacedShips = this.numberOfAlreadyPlacedShips  +1;
            return;
