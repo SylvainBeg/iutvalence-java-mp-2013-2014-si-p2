@@ -16,6 +16,9 @@ public class PlayerShipsConfigurator
      */
     private Ship[] ships;
 
+    /**
+     * The number of already placed ship in the game
+     */
     private int numberOfAlreadyPlacedShips;
 
     /**
@@ -36,13 +39,14 @@ public class PlayerShipsConfigurator
     {
         return this.ships;
     }
+    
+
 
     /**
      * place a ship in the grid
      * 
      * @param shipSize
      *            :area number of ship to create
-     * @return ship : a ship area array (ready to be place in the grid )
      * @throws TooMuchAttemptsException
      *             : exception throws if we have try too much attempts to place
      *             a ship
@@ -101,14 +105,21 @@ public class PlayerShipsConfigurator
             }
 
            Ship shipToBePlaced = new Ship(shipAreas);
-           
+
            for (int ship = 0;ship <this.numberOfAlreadyPlacedShips;ship++)
                if (shipToBePlaced.overlapsShip(this.ships[ship]))
                    continue;
            
            this.ships[this.numberOfAlreadyPlacedShips] = shipToBePlaced;
+           System.out.println("bateau créé");
+         
+           System.out.println(  shipToBePlaced.getPositions()[1].getPosition().getColumn());
+           System.out.println(   this.numberOfAlreadyPlacedShips  );
+           
+           
+           this.numberOfAlreadyPlacedShips = this.numberOfAlreadyPlacedShips  +1;
            return;
-       
+          
         }
 
         throw new TooMuchAttemptsException();

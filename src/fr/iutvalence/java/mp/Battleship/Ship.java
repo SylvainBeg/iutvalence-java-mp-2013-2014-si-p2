@@ -72,7 +72,11 @@ public class Ship
         return true;
     }
     
-    
+    /**
+     * Research if there is overlaps with the ship in parameter 
+     * @param otherShip : ship which will be to compare
+     * @return true if the two ships overlap
+     */
     public boolean overlapsShip(Ship otherShip)
     {
       
@@ -80,10 +84,10 @@ public class Ship
         {
             Coordinates thisPosition = this.getPositions()[thisShipPositionIndex].getPosition();
             
-            for (int otherShipPositionIndex = 0; otherShipPositionIndex < this.getPositions().length; otherShipPositionIndex++)
+            for (int otherShipPositionIndex = 0; otherShipPositionIndex < otherShip.getPositions().length; otherShipPositionIndex++)
             {
                 
-                Coordinates otherPosition = otherShip.getPositions()[thisShipPositionIndex].getPosition();
+                Coordinates otherPosition = otherShip.getPositions()[otherShipPositionIndex].getPosition();
                         
                 if ((thisPosition.getColumn() == otherPosition.getColumn()) && (thisPosition.getLine() == otherPosition.getLine())) return true;
             }

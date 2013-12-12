@@ -63,9 +63,10 @@ public class Battle
      */
     public Battle(Ship[] shipsP1, Ship[] shipsP2)
     {
-        this.players = new PlayerInfo[3];
+        this.players = new PlayerInfo[3];      // voir comment faire ici
+        this.players[0] = new PlayerInfo(shipsP1);   // à supprimer
         this.players[1] = new PlayerInfo(shipsP1);
-        this.players[1] = new PlayerInfo(shipsP2);
+        this.players[2] = new PlayerInfo(shipsP2);
     }
 
 
@@ -94,13 +95,11 @@ public class Battle
 
         for (int i = 0; i < this.players[playerNumber].getNumberOfShips(); i++)
         {
-
             if (this.players[playerNumber].getShips()[i].isHitAt(position))
             {
                 if (this.players[playerNumber].getShips()[i].isShipSunk())
                 {
                     this.players[playerNumber].incrementScore(1);
-
                     return TOUCHED_AND_SUNK;
                 }
                 return TOUCHED;
@@ -136,7 +135,10 @@ public class Battle
 
 
 
-
+    /**
+     * Lauch the game
+     * @return
+     */
     public int play()
     {
         Scanner sc = new Scanner(System.in);
@@ -161,6 +163,7 @@ public class Battle
 
                 } while (!(x > 0 && x < Battle.DEFAULT_GRID_SIZE && y > 0 && y < Battle.DEFAULT_GRID_SIZE));
                 System.out.println("Menglon");
+                System.out.println( this.players[1].getNumberOfShips());
                 Coordinates target = new Coordinates(x,y);
                 try {
                     int resultOfShot = this.shot(target, numberAdversePlayer);
