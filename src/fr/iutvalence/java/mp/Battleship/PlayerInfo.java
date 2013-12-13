@@ -63,5 +63,79 @@ public class PlayerInfo
     {
         return this.ships;
     }
+    
+    /**
+     * Print the positions of ships
+     */
+    public void printShips()
+    {
+        for (int ship=0; ship<this.ships.length; ship++)
+        {
+            int shipNumber = ship+1;
+            System.out.println("Ship "+shipNumber);
+            this.ships[ship].printShip();
+            
+        }
+       
+    }
+    
+    
+    public void printGrid()
+    {
+        for (int line=0; line<10; line++)
+        {
+            int[] area = new int[Battle.DEFAULT_GRID_SIZE];
+            
+            for (int column =0; column<10; column++)
+            {
+                Coordinates areaCurrent = new Coordinates(column+1,line+1);
+                try
+                {
+                    if (isHit(areaCurrent))
+                    {
+                        area[column] = 1;
+                    }
+                    else
+                    {
+                        area[column] = 0;
+                    }
+                }
+                catch (BadCoordinatesException e) 
+                { 
+                }
+ 
+            }
+            
+            System.out.println("    "+area[0] + area[1] + area[2] + area[3] + area[4] + area[5] + area[6] + area[7] + area[8] + area[9]);
+        }
+       
+    }
+    
+    
+    /**
+     * 
+     * @param c : area position to test
+     * @return area hit or not
+     * @throws BadCoordinatesException
+     */
+    public boolean isHit(Coordinates c)  throws BadCoordinatesException
+    {
+        if ( c.getColumn() < 0 && c.getColumn() > Battle.DEFAULT_GRID_SIZE && c.getLine() < 0 && c.getLine() > Battle.DEFAULT_GRID_SIZE)
+            throw new BadCoordinatesException();
+        
+        for (int i =0; i<this.ships.length; i++)
+        {
+            for (int j=0; j < this.ships[i].getPositions().length; j++ )
+            {
+                if (this.ships[i].getPositions()[j].getPosition().getColumn() == c.getColumn() && this.ships[i].getPositions()[j].getPosition().getLine() == c.getLine())
+                {
+                    return true;
+                }
+            }
+        }
+        return false;         
+    }
+    
+    
 
 }

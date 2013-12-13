@@ -39,7 +39,7 @@ public class PlayerShipsConfigurator
     {
         return this.ships;
     }
-    
+
 
 
     /**
@@ -67,23 +67,26 @@ public class PlayerShipsConfigurator
         for (int attempt = 0; attempt < Battle.MAXIMAL_ATTEMPT; attempt++)
         {
 
-            
-
-            int x = 1 + r.nextInt(Battle.DEFAULT_GRID_SIZE - shipSize);
-            int y = 1 + r.nextInt(Battle.DEFAULT_GRID_SIZE - 1);
-            if (x < 0 && x > Battle.DEFAULT_GRID_SIZE && y < 0 && y > Battle.DEFAULT_GRID_SIZE)
-                continue;
-
-            if (direction == Battle.POSITION_VERTICAl)
+            int x, y;
+            if (direction != Battle.POSITION_VERTICAl)
             {
-                int t;
-                t = x;
-                x = y;
-                y = t;
+                x = 1 + r.nextInt(Battle.DEFAULT_GRID_SIZE - shipSize + 1);
+                y = 1 + r.nextInt(Battle.DEFAULT_GRID_SIZE - 1 +1);
+                if (x < 0 && x > Battle.DEFAULT_GRID_SIZE && y < 0 && y > Battle.DEFAULT_GRID_SIZE)
+                    continue;
             }
+            else
+            {
+                x = 1 + r.nextInt(Battle.DEFAULT_GRID_SIZE - 1 +1);
+                y =  1 + r.nextInt(Battle.DEFAULT_GRID_SIZE - shipSize + 1);
+                if (x < 0 && x > Battle.DEFAULT_GRID_SIZE && y < 0 && y > Battle.DEFAULT_GRID_SIZE)
+                    continue;
+            }
+
+
             Coordinates position = null; // location of the first area
             position = new Coordinates(x, y);
-            
+
             ShipArea[] shipAreas = new ShipArea[shipSize];
             shipAreas[0] = new ShipArea(position);
 
@@ -95,43 +98,26 @@ public class PlayerShipsConfigurator
                 cursor = cursor + 1;
                 if (direction == Battle.POSITION_VERTICAl)
                 {
-                    x = x + 1;
+                    y = y + 1;
                 }
                 else
                 {
-                    y = y + 1;
+                    x = x + 1;
                 }
                 position = new Coordinates(x, y);
             }
 
-           Ship shipToBePlaced = new Ship(shipAreas);
+            Ship shipToBePlaced = new Ship(shipAreas);
 
-           for (int ship = 0;ship <this.numberOfAlreadyPlacedShips;ship++)
-               if (shipToBePlaced.overlapsShip(this.ships[ship]))
-                   continue;
-           
-           this.ships[this.numberOfAlreadyPlacedShips] = shipToBePlaced;
-           
-           
-           System.out.println("bateau créé"); ///////////// ! !!!!!
-         
-           //////////// a supprimé aussi après (en bas)
-           
-           System.out.println("Bateau de taille :" +shipSize);
-               for(int j=0; j<shipToBePlaced.getPositions().length ;j++) // parcours chaque case
-               {
+            for (int ship = 0;ship <this.numberOfAlreadyPlacedShips;ship++)
+                if (shipToBePlaced.overlapsShip(this.ships[ship]))
+                    continue;
 
-                   System.out.println(shipToBePlaced.getPositions()[j].getPosition().getColumn());
-                   System.out.println("|");
-                   System.out.println(shipToBePlaced.getPositions()[j].getPosition().getLine());
-               
-               }
-           
-           /////////////// jusque là !!!
-           
-           this.numberOfAlreadyPlacedShips = this.numberOfAlreadyPlacedShips  +1;
-           return;
-          
+            this.ships[this.numberOfAlreadyPlacedShips] = shipToBePlaced;
+
+            this.numberOfAlreadyPlacedShips = this.numberOfAlreadyPlacedShips  +1;
+            return;
+
         }
 
         throw new TooMuchAttemptsException();

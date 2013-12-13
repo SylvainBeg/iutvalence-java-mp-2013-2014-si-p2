@@ -12,6 +12,11 @@ public class Ship
      * Positions : contain area ship (in order or in disorder)
      */
     private ShipArea[] positions;
+    
+    /**
+     * Indicate if ship is already sunk or not
+     */
+    private boolean shipSunk;
 
     /**
      * Initialize a ship with a ship area array (ship free in the grid) in parameter
@@ -20,6 +25,7 @@ public class Ship
     public Ship(ShipArea[] ship)
     {       
         this.positions = ship;
+        this.shipSunk = false;
     }
 
     /**
@@ -31,6 +37,18 @@ public class Ship
         return this.positions;
     }
 
+    /**
+     * Indicate if ship is already sunk or not
+     * @return if ship is already sunk or not
+     */
+    public boolean getIfShipSunk()
+    {
+        return this.shipSunk;
+    }
+
+
+    
+    
     // TODO FIXED finish writing comment (exception)
     /**
      * Research if targeted area is contained in the ship and if yes, touched it
@@ -72,6 +90,17 @@ public class Ship
         return true;
     }
     
+    
+    /**
+     * Ship become in sunk mode
+     */
+    public void updateShipSunk()
+    {         
+        this.shipSunk = true;
+    }
+    
+    
+    
     /**
      * Research if there is overlaps with the ship in parameter 
      * @param otherShip : ship which will be to compare
@@ -93,6 +122,20 @@ public class Ship
             }
         }
         return false;
+    }
+    
+    /**
+     * Print the positions of ship
+     */
+    public void printShip()
+    {
+        
+        for (int cursor=0; cursor<this.positions.length; cursor++)
+        {
+            int x = this.positions[cursor].getPosition().getColumn();
+            int y = this.positions[cursor].getPosition().getLine();
+            System.out.println("    ("+x+";"+y+")");
+        }
     }
 
 }

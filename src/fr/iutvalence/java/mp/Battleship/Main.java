@@ -1,5 +1,7 @@
 package fr.iutvalence.java.mp.Battleship;
 
+import java.util.Scanner;
+
 /**
  * Class main which run program
  * 
@@ -23,82 +25,62 @@ public class Main
 
         try
         {
-            System.out.println("J1");
             player1ShipsConfigurator.addShip(2);
             player1ShipsConfigurator.addShip(3);
             player1ShipsConfigurator.addShip(3);
             player1ShipsConfigurator.addShip(4); 
             player1ShipsConfigurator.addShip(5);
-            
-            System.out.println("J2");
+
             player2ShipsConfigurator.addShip(2);
             player2ShipsConfigurator.addShip(3);
             player2ShipsConfigurator.addShip(3);
             player2ShipsConfigurator.addShip(4);
             player2ShipsConfigurator.addShip(5);
-            
-            for (int i=0; i<player1ShipsConfigurator.getShips().length; i++) // parcours tous els bateaux
-            {
-                int aa = i+1;
-                System.out.println("Bateau" + aa);
-                for(int j=0; j<player1ShipsConfigurator.getShips()[i].getPositions().length; j++) // parcours chaque case
-                {
 
-                    System.out.println(player1ShipsConfigurator.getShips()[i].getPositions()[j].getPosition().getColumn());
-                    System.out.println("|");
-                    System.out.println(player1ShipsConfigurator.getShips()[i].getPositions()[j].getPosition().getLine());
-                
-                    
-                }
-            }
-            System.out.println("OK !");
-            
-            
-            
-            
-            
-            System.out.println(player2ShipsConfigurator.getShips()[1].getPositions()[1].isHit()); //affiche
-            
-            for (int i=0; i<player2ShipsConfigurator.getShips().length; i++) // parcours tous els bateaux
-            { int aa = i+1;
-            System.out.println("Bateau" + aa);
-                for(int j=0; j<player2ShipsConfigurator.getShips()[i].getPositions().length; j++) // parcours chaque case
-                {
-                    System.out.println(player1ShipsConfigurator.getShips()[i].getPositions()[j].getPosition().getColumn());
-                    System.out.println("|");
-                    System.out.println(player1ShipsConfigurator.getShips()[i].getPositions()[j].getPosition().getLine());
-                
-                }
-            }
-            System.out.println("OK !");
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
+
         }
         catch (TooMuchAttemptsException e)
         {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
         Battle game = new Battle(player1ShipsConfigurator.getShips(), player2ShipsConfigurator.getShips());
-        winner = game.play();
 
-        if (winner == 1)
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Choose game mode : ");
+        System.out.println("1 : play against the computer ");
+        System.out.println("2 : simulation of game (computer against computer)");
+        int gameMode = sc.nextInt();
+
+        switch(gameMode) 
         {
-            System.out.println("Tu as gagné !!.");
+        case 1:
+            winner = game.play();
+            if (winner == 1)
+            {
+                System.out.println("You are the best !! Congratulations ! :)");
+            }
+            else
+            {
+                System.out.println("Defeat ...");
+            }
+            break;
+        case 2:
+            winner = game.playAuto();
+            if (winner == 1)
+            {
+                System.out.println("Victory of computer 1 !");
+            }
+            else
+            {
+                System.out.println("Victory of computer 2 !");
+            }
+            break;
+
         }
-        else
-        {
-            System.out.println("Dommage, tu as perdu ...");
-        }
+
+
 
     }
 }
