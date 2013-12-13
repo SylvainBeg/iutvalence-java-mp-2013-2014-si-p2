@@ -3,6 +3,8 @@ package fr.iutvalence.java.mp.Battleship;
 import java.util.Random;
 import java.util.Scanner;
 
+import com.sun.org.apache.xml.internal.serializer.ToUnknownStream;
+
 /**
  * This class represents a new naval battle game.
  * 
@@ -21,20 +23,7 @@ public class Battle
      */
     public final static int DEFAULT_GRID_SIZE = 10;
 
-    /**
-     * result of shot : if any ship is not hit
-     */
-    private final static int MISSED = 0;
-
-    /**
-     * result of shot : if a ship is hit (but not sunk)
-     */
-    private final static int TOUCHED = 1;
-
-    /**
-     * result of shot : if a ship is touched and sunk
-     */
-    private final static int TOUCHED_AND_SUNK = 2;
+   
 
     /**
      * indicate that ship position is vertical
@@ -96,27 +85,16 @@ public class Battle
 
         for (int i = 0; i < this.players[playerNumberTargeted].getNumberOfShips(); i++)
         {
-
-            if (this.players[playerNumberTargeted].getShips()[i].isHitAt(position))
+            int shotResult = this.players[playerNumberTargeted].getShips()[i].isHitAt(position);
+            switch (shotResult)
             {
-                if (this.players[playerNumberTargeted].getShips()[i].isShipSunk())
-                {
-                    if (this.players[playerNumberTargeted].getShips()[i].getIfShipSunk())
-                    {
-                        return MISSED;   // ship already sunk
-                    }
-                    else
-                    {
-                        this.players[playerNumberTargeter].incrementScore(1);
-                        this.players[playerNumberTargeted].getShips()[i].updateShipSunk();
-                        return TOUCHED_AND_SUNK;
-                    }
-                }
-                return TOUCHED;
+            case Ship.MISSED : continue;
+            case Ship.SUNK :  this.players[playerNumberTargeter].incrementScore(1);
+            default: return shotResult;
             }
+           
         }
-
-        return MISSED;   
+        return Ship.MISSED;
     }
 
 
@@ -161,10 +139,10 @@ public class Battle
 
         System.out.println("Your ship :");
         this.players[1].printShips();
+        this.players[numberCurrentPlayer].printGridWithPlayerShips();
 
-
-        System.out.println("                                                                                    *****  Your shot *****");
-        System.out.println("                                                                                                                                    ***** Shot adverse *****");
+        System.out.println("\t\t\t\t\t\t\t*****  Your shot *****");
+        System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t***** Shot adverse *****");
 
 
         while (true) {
@@ -183,14 +161,14 @@ public class Battle
                     int resultOfShot = this.shot(target, numberAdversePlayer, numberCurrentPlayer);
                     switch(resultOfShot) 
                     {
-                    case MISSED:
-                        System.out.println("                                                                                    Target : "+x+" ; "+y+"   -->   Missed !");
+                    case Ship.MISSED:
+                        System.out.println("\t\t\t\t\t\t\t\tTarget : "+x+" ; "+y+"   -->   Missed !");
                         break;
-                    case TOUCHED:
-                        System.out.println("                                                                                    Target : "+x+" ; "+y+"   -->   Touched !");
+                    case Ship.TOUCHED:
+                        System.out.println("\t\t\t\t\t\t\t\tTarget : "+x+" ; "+y+"   -->   Touched !");
                         break;
-                    case TOUCHED_AND_SUNK:
-                        System.out.println("                                                                                    Target : "+x+" ; "+y+"   -->   Touched and sunk !!");
+                    case Ship.SUNK:
+                        System.out.println("\t\t\t\t\t\t\t\tTarget : "+x+" ; "+y+"   -->   Touched and sunk !!");
                         break;
                     }
                 }
@@ -210,28 +188,28 @@ public class Battle
                     int resultOfShot = this.shot(target, numberAdversePlayer, numberCurrentPlayer);
                     switch(resultOfShot) 
                     {
-                    case MISSED:
-                        System.out.println("                                                                                                                                    Target : "+x+" ; "+y+"   -->   Yes! : The adverse missed you !");
+                    case Ship.MISSED:
+                        System.out.println("\t\t\t\t\t\t\t\t\t\tTarget : "+x+" ; "+y+"   -->   Yes! : The adverse missed you !");
                         break;
-                    case TOUCHED:
-                        System.out.println("                                                                                                                                   Target : "+x+" ; "+y+"   -->    Be careful : You are touched !");
+                    case Ship.TOUCHED:
+                        System.out.println("\t\t\t\t\t\t\t\t\t\tTarget : "+x+" ; "+y+"   -->    Be careful : You are touched !");
                         break;
-                    case TOUCHED_AND_SUNK:
-                        System.out.println("                                                                                                                                    Target : "+x+" ; "+y+"   -->   Ouch! : one of your ship is sunk !!");
+                    case Ship.SUNK:
+                        System.out.println("\t\t\t\t\t\t\t\t\t\tTarget : "+x+" ; "+y+"   -->   Ouch! : one of your ship is sunk !!");
                         break;
                     }
                 }
                 catch (BadCoordinatesException e) 
                 { 
                 }
-
             }
+            System.out.println(" ");
 
             if (this.isGameWon(numberCurrentPlayer))
             {
                 return numberCurrentPlayer;
             }
-            this.players[numberCurrentPlayer].printGrid();
+            
 
             int number = numberCurrentPlayer;
             numberCurrentPlayer = numberAdversePlayer;
@@ -268,12 +246,11 @@ public class Battle
         int numberAdversePlayer = 2;
 
         System.out.println("Player 1 ship :");
-        this.players[1].printShips();
-        System.out.println("Player 2 ship :");
 
-
-        System.out.println("                                                                                    ***** Computer 1 *****");
-        System.out.println("                                                                                                                                    ***** Computer 2 *****");
+        
+        
+        System.out.println("\t\t\t\t\t\t\t\t\t***** Computer 1 *****");
+        System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t***** Computer 2 *****");
 
 
         while (true) {
@@ -291,14 +268,14 @@ public class Battle
                 {
                     switch(resultOfShot) 
                     {
-                    case MISSED:
-                        System.out.println("                                                                                    Target : "+x+" ; "+y+"   -->    Missed !");
+                    case Ship.MISSED:
+                        System.out.println("\t\t\t\t\t\t\t\t\tTarget : "+x+" ; "+y+"   -->    Missed !");
                         break;
-                    case TOUCHED:
-                        System.out.println("                                                                                    Target : "+x+" ; "+y+"   -->    Touched  !");
+                    case Ship.TOUCHED:
+                        System.out.println("\t\t\t\t\t\t\t\t\tTarget : "+x+" ; "+y+"   -->    Touched  !");
                         break;
-                    case TOUCHED_AND_SUNK:
-                        System.out.println("                                                                                    Target : "+x+" ; "+y+"   -->    Touched and sunk !!");
+                    case Ship.SUNK:
+                        System.out.println("\t\t\t\t\t\t\t\t\tTarget : "+x+" ; "+y+"   -->    Touched and sunk !!");
                         break;
                     }
                 }
@@ -306,14 +283,14 @@ public class Battle
                 {
                     switch(resultOfShot) 
                     {
-                    case MISSED:
-                        System.out.println("                                                                                                                                   Target : "+x+" ; "+y+"   -->   Missed !");
+                    case Ship.MISSED:
+                        System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\tTarget : "+x+" ; "+y+"   -->   Missed !");
                         break;
-                    case TOUCHED:
-                        System.out.println("                                                                                                                                   Target : "+x+" ; "+y+"   -->   Touched !");
+                    case Ship.TOUCHED:
+                        System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\tTarget : "+x+" ; "+y+"   -->   Touched !");
                         break;
-                    case TOUCHED_AND_SUNK:
-                        System.out.println("                                                                                                                                   Target : "+x+" ; "+y+"   -->   Touched and sunk !!");
+                    case Ship.SUNK:
+                        System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\tTarget : "+x+" ; "+y+"   -->   Touched and sunk !!");
                         break;
                     }
                 }

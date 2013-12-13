@@ -79,19 +79,22 @@ public class PlayerInfo
        
     }
     
-    
-    public void printGrid()
+    /**
+     * Print game grid which represents player ships
+     */
+    public void printGridWithPlayerShips()
     {
+        System.out.println("         1    2    3    4    5    6    7     8    9    10");
+        System.out.println("        ");
         for (int line=0; line<10; line++)
         {
             int[] area = new int[Battle.DEFAULT_GRID_SIZE];
-            
             for (int column =0; column<10; column++)
             {
                 Coordinates areaCurrent = new Coordinates(column+1,line+1);
                 try
                 {
-                    if (isHit(areaCurrent))
+                    if (isShipInArea(areaCurrent))
                     {
                         area[column] = 1;
                     }
@@ -105,12 +108,14 @@ public class PlayerInfo
                 }
  
             }
-            
-            System.out.println("    "+area[0] + area[1] + area[2] + area[3] + area[4] + area[5] + area[6] + area[7] + area[8] + area[9]);
+            int lineNumber = line+1;
+            System.out.println(lineNumber+" |      "+area[0]+"     "+ area[1]+"    " + area[2]+"    " + area[3]+"    " + area[4]+"    " + area[5]+"    " + area[6]+"    " + area[7]+"    " + area[8]+"    " + area[9]);
         }
        
     }
     
+    
+
     
     /**
      * 
@@ -118,7 +123,7 @@ public class PlayerInfo
      * @return area hit or not
      * @throws BadCoordinatesException
      */
-    public boolean isHit(Coordinates c)  throws BadCoordinatesException
+    public boolean isShipInArea(Coordinates c)  throws BadCoordinatesException
     {
         if ( c.getColumn() < 0 && c.getColumn() > Battle.DEFAULT_GRID_SIZE && c.getLine() < 0 && c.getLine() > Battle.DEFAULT_GRID_SIZE)
             throw new BadCoordinatesException();
@@ -135,7 +140,7 @@ public class PlayerInfo
         }
         return false;         
     }
-    
+
     
 
 }

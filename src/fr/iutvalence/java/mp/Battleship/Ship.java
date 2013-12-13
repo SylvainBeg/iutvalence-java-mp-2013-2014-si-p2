@@ -9,6 +9,26 @@ package fr.iutvalence.java.mp.Battleship;
 public class Ship 
 {
     /**
+     * result of shot : if any ship is not hit
+     */
+    public final static int MISSED = 0;
+
+    /**
+     * result of shot : if a ship is hit (but not sunk)
+     */
+    public final static int TOUCHED = 1;
+
+    /**
+     * result of shot : if a ship is touched and sunk
+     */
+    public final static int SUNK = 2;
+    
+    /**
+     * result of shot : if a ship is touched again (no state change)
+     */
+    public final static int RE_TOUCHED = 3;
+    
+    /**
      * Positions : contain area ship (in order or in disorder)
      */
     private ShipArea[] positions;
@@ -36,17 +56,6 @@ public class Ship
     {
         return this.positions;
     }
-
-    /**
-     * Indicate if ship is already sunk or not
-     * @return if ship is already sunk or not
-     */
-    public boolean getIfShipSunk()
-    {
-        return this.shipSunk;
-    }
-
-
     
     
     // TODO FIXED finish writing comment (exception)
@@ -57,7 +66,7 @@ public class Ship
      * @return true if ship is hit, else false (coordinate not found in the ship)
      * @throws BadCoordinatesException : exception throws if coordinates are not in the grid
      */
-    public boolean isHitAt(Coordinates c)  throws BadCoordinatesException
+    public int isHitAt(Coordinates c)  throws BadCoordinatesException
     {
         if ( c.getColumn() < 0 && c.getColumn() > Battle.DEFAULT_GRID_SIZE && c.getLine() < 0 && c.getLine() > Battle.DEFAULT_GRID_SIZE)
             throw new BadCoordinatesException();
@@ -66,11 +75,13 @@ public class Ship
         {
             if (this.positions[i].getPosition().getColumn() == c.getColumn() && this.positions[i].getPosition().getLine() == c.getLine())
             {
+                if  (this.positions[i].isHit()) return RE_TOUCHED;
                 this.positions[i].setHit(true);
-                return true;
+                if (this.isShipSunk()) return SUNK;
+                return TOUCHED;
             }
         }
-        return false;
+        return MISSED;
     }
 
     
@@ -89,16 +100,6 @@ public class Ship
         }
         return true;
     }
-    
-    
-    /**
-     * Ship become in sunk mode
-     */
-    public void updateShipSunk()
-    {         
-        this.shipSunk = true;
-    }
-    
     
     
     /**

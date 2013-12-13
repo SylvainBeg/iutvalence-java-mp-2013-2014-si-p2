@@ -61,8 +61,7 @@ public class PlayerShipsConfigurator
         // TODO FIXED declare hard-coded values as constant (not as local
         // variables)
 
-        int direction = r.nextInt(1); // 0 : horizontal and 1 : vertical
-
+        int direction = r.nextInt(2); // 0 : horizontal and 1 : vertical
 
         for (int attempt = 0; attempt < Battle.MAXIMAL_ATTEMPT; attempt++)
         {
